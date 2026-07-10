@@ -1,4 +1,9 @@
-<div class="todo-item flex items-center gap-4 px-6 py-4 border-b border-slate-100 animate-slide-in hover:bg-slate-50">
+<div
+  class="todo-item flex items-center gap-4 px-6 py-4 border-b border-slate-100 animate-slide-in hover:bg-slate-50"
+  [class.low]="todo().priority === 'Low'"
+  [class.medium]="todo().priority === 'Medium'"
+  [class.high]="todo().priority === 'High'"
+>
   <div
     class="todo-check w-6 h-6 rounded-full border-2 flex items-center justify-center cursor-pointer flex-shrink-0 transition-colors duration-200"
     [ngClass]="
@@ -23,7 +28,26 @@
       {{ todo().title }}
     </div>
 
-    <div class="flex items-center gap-3 text-xs">
+    <div class="todo-priority" [class]="todo().priority.toLowerCase()">
+      @switch (todo().priority) {
+        @case ('Low') {
+          <i class="fa-solid fa-circle"></i>
+          <span>Low</span>
+        }
+
+        @case ('Medium') {
+          <i class="fa-solid fa-circle"></i>
+          <span>Medium</span>
+        }
+
+        @case ('High') {
+          <i class="fa-solid fa-circle"></i>
+          <span>High</span>
+        }
+      }
+    </div>
+
+    <div class="flex items-center gap-3 text-xs mt-2">
       <span class="text-slate-400 flex items-center gap-1">
         <i class="fa-regular fa-calendar"></i>
         {{ todo().createdAt | date: 'MMM d, y' }}

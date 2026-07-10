@@ -48,6 +48,12 @@ export class Toolbar {
       case 'NameDesc':
         return 'Name (Z-A)';
 
+      case 'PriorityHigh':
+        return 'Highest Priority'
+
+      case 'PriorityLow':
+        return 'Lowest Priority'
+
       default:
         return 'Sort by';
     }

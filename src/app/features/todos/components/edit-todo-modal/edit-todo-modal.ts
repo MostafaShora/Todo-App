@@ -1,12 +1,7 @@
-import {
-  Component,
-  effect,
-  input,
-  output,
-  signal,
-} from '@angular/core';
+import { Component, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../../../models/todo.model';
+import { Priority } from '../../../../core/types/priority.type';
 
 @Component({
   selector: 'app-edit-todo-modal',
@@ -16,7 +11,6 @@ import { Todo } from '../../../../models/todo.model';
   styleUrl: './edit-todo-modal.css',
 })
 export class EditTodoModal {
-
   todo = input.required<Todo>();
 
   close = output<void>();
@@ -24,20 +18,33 @@ export class EditTodoModal {
   save = output<{
     id: number;
     title: string;
+    priority: Priority;
   }>();
 
   title = signal('');
 
+  priority = signal<Priority>('Low');
+  isPriorityOpen = signal(false)
+
   constructor() {
-
     effect(() => {
-      this.title.set(this.todo().title);
-    });
+      const todo = this.todo();
 
+      this.title.set(todo.title);
+      this.priority.set(todo.priority);
+    });
+  }
+
+  togglePriority() {
+    this.isPriorityOpen.update(value => !value);
+  }
+
+  selectPriority(priority: Priority) {
+    this.priority.set(priority);
+    this.isPriorityOpen.set(false);
   }
 
   onSave() {
-
     console.log('Modal Save');
     const value = this.title().trim();
 
@@ -46,12 +53,11 @@ export class EditTodoModal {
     this.save.emit({
       id: this.todo().id,
       title: value,
+      priority: this.priority(),
     });
-
   }
 
   onClose() {
     this.close.emit();
   }
-
 }

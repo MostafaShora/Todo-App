@@ -10,6 +10,7 @@ import { TodoService } from '../../core/services/todo';
 import { ConfirmModal } from "../../shared/components/confirm-modal/confirm-modal";
 import { Toast } from "../../shared/components/toast/toast";
 import { ToastService } from '../../shared/services/toast';
+import { Priority } from '../../core/types/priority.type';
 
 @Component({
   selector: 'app-home',
@@ -41,11 +42,12 @@ export class Home {
     this.isEditModalOpen.set(false);
   }
 
-  saveTodo(event: { id: number; title: string }) {
+  saveTodo(event: { id: number; title: string; priority: Priority; }) {
 
     this.todoService.updateTodo(
       event.id,
-      event.title
+      event.title,
+      event.priority
     );
 
     this.toastService.show(

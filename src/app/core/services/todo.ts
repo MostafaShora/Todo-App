@@ -2,6 +2,7 @@ import { computed, effect, Service, signal } from '@angular/core';
 import { TodoFilter } from '../types/todo-filter.type';
 import { Todo } from '../../models/todo.model';
 import { SortOption } from '../types/sort-option.type';
+import { Priority } from '../types/priority.type';
 
 @Service()
 export class TodoService {
@@ -63,6 +64,12 @@ export class TodoService {
                 break;
         }
 
+        const priorityOrder: Record<Priority, number> = {
+            High: 3,
+            Medium: 2,
+            Low: 1,
+        };
+
         // Sort
         switch (this.sort()) {
             case 'Newest':
@@ -80,6 +87,22 @@ export class TodoService {
             case 'NameDesc':
                 todos.sort((a, b) => b.title.localeCompare(a.title));
                 break;
+                
+            case 'PriorityHigh':
+                todos.sort(
+                    (a, b) =>
+                        priorityOrder[b.priority] -
+                        priorityOrder[a.priority]
+                );
+                break;
+
+            case 'PriorityLow':
+                todos.sort(
+                    (a, b) =>
+                        priorityOrder[a.priority] -
+                        priorityOrder[b.priority]
+                );
+                break;
         }
 
         return todos;
@@ -95,12 +118,14 @@ export class TodoService {
                     id: 1,
                     title: 'Design new landing page',
                     status: 'Pending',
+                    priority: 'High',
                     createdAt: new Date(),
                 },
                 {
                     id: 2,
                     title: 'Review Pull Request',
                     status: 'Completed',
+                    priority: 'High',
                     createdAt: new Date(),
                 },
             ];
@@ -108,29 +133,32 @@ export class TodoService {
 
         return JSON.parse(data).map((todo: Todo) => ({
             ...todo,
+            priority: todo.priority ?? 'Medium',
             createdAt: new Date(todo.createdAt),
         }))
     };
 
     // 3. CRUD Operations
-    addTodo(title: string) {
+    addTodo(title: string, priority: Priority) {
         const todo: Todo = {
             id: Date.now(),
             title: title,
             status: 'Pending',
+            priority,
             createdAt: new Date(),
         };
 
         this.todos.update((todos) => [...todos, todo]);
     }
 
-    updateTodo(id: number, title: string) {
+    updateTodo(id: number, title: string, priority: Priority) {
         this.todos.update((todos) =>
             todos.map((todo) =>
                 todo.id === id
                     ? {
                         ...todo,
                         title,
+                        priority
                     }
                     : todo,
             ),

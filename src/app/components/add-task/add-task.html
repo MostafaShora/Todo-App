@@ -1,18 +1,80 @@
-<div class="p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
-  <div class="flex gap-3 items-stretch">
+<div class="add-task-container">
+  <div class="task-row">
     <input
       type="text"
-      class="add-input flex-1 border-2 border-slate-200 rounded-lg px-4 py-3 text-sm font-normal transition-all placeholder:text-slate-400"
-      placeholder="What needs to be done?"
       [(ngModel)]="taskTitle"
+      placeholder="What needs to be done?"
+      class="add-input"
     />
-    <button
-      type="button"
-      class="btn-add text-white rounded-lg px-6 py-3 font-semibold text-sm flex items-center gap-2 whitespace-nowrap"
-      (click)="addTask()"
-    >
+
+    <button class="btn-add" (click)="addTask()">
       <i class="fa-solid fa-plus"></i>
       Add Task
     </button>
+  </div>
+
+  <div class="priority-row">
+    <span class="priority-label"> Priority </span>
+
+    <div class="relative">
+      <button type="button" (click)="togglePriority()" class="priority-btn">
+        <div class="flex items-center gap-2">
+          @switch (priority) {
+            @case ('Low') {
+              <i class="fa-solid fa-circle text-green-500 text-xs"></i>
+            }
+
+            @case ('Medium') {
+              <i class="fa-solid fa-circle text-yellow-400 text-xs"></i>
+            }
+
+            @case ('High') {
+              <i class="fa-solid fa-circle text-red-500 text-xs"></i>
+            }
+          }
+
+          {{ priority }}
+        </div>
+
+        <i class="fa-solid fa-chevron-down" [class.rotate-180]="isPriorityOpen()"></i>
+      </button>
+
+      @if (isPriorityOpen()) {
+        <div class="priority-menu">
+          <button (click)="selectPriority('Low')" class="priority-item">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle text-green-500 text-xs"></i>
+              Low
+            </div>
+
+            @if (priority === 'Low') {
+              <i class="fa-solid fa-check text-green-500"></i>
+            }
+          </button>
+
+          <button (click)="selectPriority('Medium')" class="priority-item">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle text-yellow-400 text-xs"></i>
+              Medium
+            </div>
+
+            @if (priority === 'Medium') {
+              <i class="fa-solid fa-check text-yellow-500"></i>
+            }
+          </button>
+
+          <button (click)="selectPriority('High')" class="priority-item">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-circle text-red-500 text-xs"></i>
+              High
+            </div>
+
+            @if (priority === 'High') {
+              <i class="fa-solid fa-check text-red-500"></i>
+            }
+          </button>
+        </div>
+      }
+    </div>
   </div>
 </div>

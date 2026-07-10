@@ -11,89 +11,119 @@
     />
   </div>
 
-<div class="relative group">
-  <button
-    class="border-2 border-slate-200 bg-white text-slate-600 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-sky-500 hover:text-sky-500 transition-all"
-  >
-    <i class="fa-solid fa-arrow-down-wide-short"></i>
-
-    {{ currentSortLabel() }}
-
-    <i class="fa-solid fa-chevron-down text-xs"></i>
-  </button>
-
-  <div
-    class="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-2 hidden group-hover:block z-10"
-  >
-
-    <!-- Newest -->
+  <div class="relative group">
     <button
-      type="button"
-      (click)="setSort('Newest')"
-      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      class="border-2 border-slate-200 bg-white text-slate-600 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-sky-500 hover:text-sky-500 transition-all"
     >
-      <span class="flex items-center gap-2">
-        <i class="fa-solid fa-calendar w-4"></i>
-        Date Added (Newest)
-      </span>
+      <i class="fa-solid fa-arrow-down-wide-short"></i>
 
-      @if(currentSort() === 'Newest'){
-        <i class="fa-solid fa-check text-sky-500"></i>
-      }
+      {{ currentSortLabel() }}
+
+      <i class="fa-solid fa-chevron-down text-xs"></i>
     </button>
 
-    <!-- Oldest -->
-    <button
-      type="button"
-      (click)="setSort('Oldest')"
-      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+    <div
+      class="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-2 hidden group-hover:block z-10"
     >
-      <span class="flex items-center gap-2">
-        <i class="fa-solid fa-calendar-days w-4"></i>
-        Date Added (Oldest)
-      </span>
+      <!-- Newest -->
+      <button
+        type="button"
+        (click)="setSort('Newest')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-calendar w-4"></i>
+          Date Added (Newest)
+        </span>
 
-      @if(currentSort() === 'Oldest'){
-        <i class="fa-solid fa-check text-sky-500"></i>
-      }
-    </button>
+        @if (currentSort() === 'Newest') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
 
-    <div class="border-t border-slate-100 my-1"></div>
+      <!-- Oldest -->
+      <button
+        type="button"
+        (click)="setSort('Oldest')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days w-4"></i>
+          Date Added (Oldest)
+        </span>
 
-    <!-- Name Asc -->
-    <button
-      type="button"
-      (click)="setSort('NameAsc')"
-      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
-    >
-      <span class="flex items-center gap-2">
-        <i class="fa-solid fa-font w-4"></i>
-        Name (A-Z)
-      </span>
+        @if (currentSort() === 'Oldest') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
 
-      @if(currentSort() === 'NameAsc'){
-        <i class="fa-solid fa-check text-sky-500"></i>
-      }
-    </button>
+      <div class="border-t border-slate-100 my-1"></div>
 
-    <!-- Name Desc -->
-    <button
-      type="button"
-      (click)="setSort('NameDesc')"
-      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
-    >
-      <span class="flex items-center gap-2">
-        <i class="fa-solid fa-font w-4"></i>
-        Name (Z-A)
-      </span>
+      <!-- Name Asc -->
+      <button
+        type="button"
+        (click)="setSort('NameAsc')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-font w-4"></i>
+          Name (A-Z)
+        </span>
 
-      @if(currentSort() === 'NameDesc'){
-        <i class="fa-solid fa-check text-sky-500"></i>
-      }
-    </button>
+        @if (currentSort() === 'NameAsc') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
 
+      <!-- Name Desc -->
+      <button
+        type="button"
+        (click)="setSort('NameDesc')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-font w-4"></i>
+          Name (Z-A)
+        </span>
+
+        @if (currentSort() === 'NameDesc') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
+
+      <!-- Highest Priority -->
+      <button
+        type="button"
+        (click)="setSort('PriorityHigh')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-arrow-up-wide-short w-4"></i>
+          Highest Priority
+        </span>
+
+        @if (currentSort() === 'PriorityHigh') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
+
+      <!-- Lowest Priority -->
+      <button
+        type="button"
+        (click)="setSort('PriorityLow')"
+        class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+      >
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-arrow-down-wide-short w-4"></i>
+          Lowest Priority
+        </span>
+
+        @if (currentSort() === 'PriorityLow') {
+          <i class="fa-solid fa-check text-sky-500"></i>
+        }
+      </button>
+    </div>
   </div>
-</div>
 
   <div class="flex gap-2 flex-wrap">
     <!-- All -->
