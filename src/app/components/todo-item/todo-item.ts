@@ -13,7 +13,7 @@ export class TodoItem {
 
   todo = input.required<Todo>();
 
-  delete = output<number>();
+  delete = output<Todo>();
 
   toggle = output<number>();
 
@@ -21,7 +21,7 @@ export class TodoItem {
 
 
   onDelete() {
-    this.delete.emit(this.todo().id)
+    this.delete.emit(this.todo())
   }
 
   onToggle() {

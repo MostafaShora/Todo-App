@@ -10,10 +10,21 @@
 
     <app-toolbar />
 
-    <app-todo-list (edit)="openEdit($event)"> </app-todo-list>
+    <app-todo-list (edit)="openEdit($event)" (delete)="openDelete($event)"> </app-todo-list>
   </div>
+
   @if (isEditModalOpen()) {
     <app-edit-todo-modal [todo]="selectedTodo()!" (save)="saveTodo($event)" (close)="closeEdit()">
     </app-edit-todo-modal>
+  }
+
+  @if (isDeleteModalOpen() && deleteTodo()) {
+    <app-confirm-modal
+      title="Delete Task"
+      [message]="'Are you sure you want to delete ' + deleteTodo()!.title + '?'"
+      (cancel)="closeDelete()"
+      (confirm)="confirmDelete()"
+    >
+    </app-confirm-modal>
   }
 </div>

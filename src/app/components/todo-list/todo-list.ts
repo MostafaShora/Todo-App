@@ -16,8 +16,10 @@ export class TodoList {
 
   todos = this.todoService.filteredTodos;
 
-  deleteTodo(id: number) {
-    this.todoService.deleteTodo(id);
+  delete = output<Todo>();
+
+  onDelete(todo: Todo) {
+    this.delete.emit(todo);
   }
 
   toggleTodo(id: number) {

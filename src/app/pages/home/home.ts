@@ -7,10 +7,11 @@ import { TodoList } from "../../components/todo-list/todo-list";
 import { Todo } from '../../models/todo.model';
 import { EditTodoModal } from "../../features/todos/components/edit-todo-modal/edit-todo-modal";
 import { TodoService } from '../../core/services/todo';
+import { ConfirmModal } from "../../shared/components/confirm-modal/confirm-modal";
 
 @Component({
   selector: 'app-home',
-  imports: [Header, Stats, AddTask, Toolbar, TodoList, EditTodoModal],
+  imports: [Header, Stats, AddTask, Toolbar, TodoList, EditTodoModal, ConfirmModal],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -20,6 +21,10 @@ export class Home {
   selectedTodo = signal<Todo | null>(null);
 
   isEditModalOpen = signal(false);
+
+  deleteTodo = signal<Todo | null>(null);
+
+  isDeleteModalOpen = signal(false);
 
   openEdit(todo: Todo) {
     console.log('Home', todo);
@@ -43,5 +48,32 @@ export class Home {
 
   }
 
+  openDelete(todo: Todo) {
+
+    this.deleteTodo.set(todo);
+
+    this.isDeleteModalOpen.set(true);
+
+  }
+
+  closeDelete() {
+
+    this.deleteTodo.set(null);
+
+    this.isDeleteModalOpen.set(false);
+
+  }
+
+  confirmDelete() {
+
+  const todo = this.deleteTodo();
+
+  if (!todo) return;
+
+  this.todoService.deleteTodo(todo.id);
+
+  this.closeDelete();
+
+}
 
 }
