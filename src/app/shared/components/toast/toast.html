@@ -1,0 +1,25 @@
+@for (toast of toastService.toasts(); track toast.id) {
+  <div
+    class="fixed top-5 right-5 z-50 flex items-center gap-3 rounded-xl px-5 py-4 shadow-xl text-white min-w-[320px] animate-slide-in"
+    [ngClass]="{
+      'bg-emerald-500': toast.type === 'success',
+      'bg-red-500': toast.type === 'error',
+      'bg-amber-500': toast.type === 'warning',
+      'bg-sky-500': toast.type === 'info',
+    }"
+  >
+    <i
+      class="text-lg"
+      [ngClass]="{
+        'fa-solid fa-circle-check': toast.type === 'success',
+        'fa-solid fa-circle-xmark': toast.type === 'error',
+        'fa-solid fa-triangle-exclamation': toast.type === 'warning',
+        'fa-solid fa-circle-info': toast.type === 'info',
+      }"
+    ></i>
+
+    <span class="text-sm font-medium">
+      {{ toast.message }}
+    </span>
+  </div>
+}

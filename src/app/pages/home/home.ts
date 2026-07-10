@@ -8,15 +8,19 @@ import { Todo } from '../../models/todo.model';
 import { EditTodoModal } from "../../features/todos/components/edit-todo-modal/edit-todo-modal";
 import { TodoService } from '../../core/services/todo';
 import { ConfirmModal } from "../../shared/components/confirm-modal/confirm-modal";
+import { Toast } from "../../shared/components/toast/toast";
+import { ToastService } from '../../shared/services/toast';
 
 @Component({
   selector: 'app-home',
-  imports: [Header, Stats, AddTask, Toolbar, TodoList, EditTodoModal, ConfirmModal],
+  imports: [Header, Stats, AddTask, Toolbar, TodoList, EditTodoModal, ConfirmModal, Toast],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
   private todoService = inject(TodoService);
+
+  private toastService = inject(ToastService);
 
   selectedTodo = signal<Todo | null>(null);
 
@@ -44,6 +48,11 @@ export class Home {
       event.title
     );
 
+    this.toastService.show(
+      'Success',
+      'Task updated successfully'
+    );
+
     this.closeEdit();
 
   }
@@ -66,14 +75,20 @@ export class Home {
 
   confirmDelete() {
 
-  const todo = this.deleteTodo();
+    const todo = this.deleteTodo();
 
-  if (!todo) return;
+    if (!todo) return;
 
-  this.todoService.deleteTodo(todo.id);
+    this.todoService.deleteTodo(todo.id);
 
-  this.closeDelete();
+    this.toastService.show(
+      'Deleted',
+      'Task deleted successfully',
+      'error'
+    );
 
-}
+    this.closeDelete();
+
+  }
 
 }
