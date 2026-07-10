@@ -23,7 +23,9 @@ export class ToastService {
         this.toasts.update(t => [...t, toast]);
 
         setTimeout(() => {
-            this.remove(toast.id);
+
+            this.close(toast.id);
+
         }, duration);
 
     }
@@ -32,5 +34,26 @@ export class ToastService {
         this.toasts.update(t =>
             t.filter(x => x.id !== id)
         );
+    }
+
+    close(id: number) {
+
+        this.toasts.update(toasts =>
+            toasts.map(toast =>
+                toast.id === id
+                    ? {
+                        ...toast,
+                        closing: true
+                    }
+                    : toast
+            )
+        );
+
+        setTimeout(() => {
+
+            this.remove(id);
+
+        }, 300);
+
     }
 }

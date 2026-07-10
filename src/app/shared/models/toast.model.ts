@@ -6,4 +6,5 @@ export interface Toast {
   message: string;
   type: ToastType;
   duration: number;
+  closing?: boolean;
 }
