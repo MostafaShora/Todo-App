@@ -1,0 +1,14 @@
+.add-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 4px rgb(14 165 233 /.1);
+  outline: none;
+}
+
+.btn-add {
+  background: linear-gradient(135deg,#0ea5e9,#0284c7);
+  transition: .2s;
+}
+
+.btn-add:hover{
+  transform:translateY(-2px);
+}

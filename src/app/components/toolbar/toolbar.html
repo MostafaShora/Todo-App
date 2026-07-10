@@ -1,0 +1,144 @@
+<div class="flex flex-wrap gap-3 items-center p-4 border-b border-slate-100 bg-slate-50">
+  <div class="relative flex-1 min-w-[200px]">
+    <i
+      class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"
+    ></i>
+    <input
+      type="text"
+      class="search-input w-full pl-10 pr-4 py-2 border-2 border-slate-200 rounded-lg text-sm bg-white transition-all placeholder:text-slate-400"
+      placeholder="Search tasks..."
+      (input)="onSearch($event)"
+    />
+  </div>
+
+<div class="relative group">
+  <button
+    class="border-2 border-slate-200 bg-white text-slate-600 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-sky-500 hover:text-sky-500 transition-all"
+  >
+    <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+    {{ currentSortLabel() }}
+
+    <i class="fa-solid fa-chevron-down text-xs"></i>
+  </button>
+
+  <div
+    class="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-slate-200 py-2 hidden group-hover:block z-10"
+  >
+
+    <!-- Newest -->
+    <button
+      type="button"
+      (click)="setSort('Newest')"
+      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+    >
+      <span class="flex items-center gap-2">
+        <i class="fa-solid fa-calendar w-4"></i>
+        Date Added (Newest)
+      </span>
+
+      @if(currentSort() === 'Newest'){
+        <i class="fa-solid fa-check text-sky-500"></i>
+      }
+    </button>
+
+    <!-- Oldest -->
+    <button
+      type="button"
+      (click)="setSort('Oldest')"
+      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+    >
+      <span class="flex items-center gap-2">
+        <i class="fa-solid fa-calendar-days w-4"></i>
+        Date Added (Oldest)
+      </span>
+
+      @if(currentSort() === 'Oldest'){
+        <i class="fa-solid fa-check text-sky-500"></i>
+      }
+    </button>
+
+    <div class="border-t border-slate-100 my-1"></div>
+
+    <!-- Name Asc -->
+    <button
+      type="button"
+      (click)="setSort('NameAsc')"
+      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+    >
+      <span class="flex items-center gap-2">
+        <i class="fa-solid fa-font w-4"></i>
+        Name (A-Z)
+      </span>
+
+      @if(currentSort() === 'NameAsc'){
+        <i class="fa-solid fa-check text-sky-500"></i>
+      }
+    </button>
+
+    <!-- Name Desc -->
+    <button
+      type="button"
+      (click)="setSort('NameDesc')"
+      class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+    >
+      <span class="flex items-center gap-2">
+        <i class="fa-solid fa-font w-4"></i>
+        Name (Z-A)
+      </span>
+
+      @if(currentSort() === 'NameDesc'){
+        <i class="fa-solid fa-check text-sky-500"></i>
+      }
+    </button>
+
+  </div>
+</div>
+
+  <div class="flex gap-2 flex-wrap">
+    <!-- All -->
+    <button
+      (click)="setFilter('All')"
+      class="filter-pill rounded-full px-4 py-1.5 text-sm font-medium border-2 flex items-center gap-1.5 transition-all"
+      [class.border-sky-500]="currentFilter() === 'All'"
+      [class.text-sky-500]="currentFilter() === 'All'"
+      [class.bg-sky-50]="currentFilter() === 'All'"
+      [class.border-slate-200]="currentFilter() !== 'All'"
+      [class.text-slate-500]="currentFilter() !== 'All'"
+      [class.bg-white]="currentFilter() !== 'All'"
+    >
+      <i class="fa-solid fa-layer-group text-xs"></i>
+      All
+    </button>
+
+    <!-- Pending -->
+    <button
+      (click)="setFilter('Pending')"
+      class="filter-pill rounded-full px-4 py-1.5 text-sm font-medium border-2 flex items-center gap-1.5 transition-all"
+      [class.border-sky-500]="currentFilter() === 'Pending'"
+      [class.text-sky-500]="currentFilter() === 'Pending'"
+      [class.bg-sky-50]="currentFilter() === 'Pending'"
+      [class.border-slate-200]="currentFilter() !== 'Pending'"
+      [class.text-slate-500]="currentFilter() !== 'Pending'"
+      [class.bg-white]="currentFilter() !== 'Pending'"
+    >
+      <i class="fa-solid fa-clock text-xs"></i>
+      Pending
+    </button>
+
+    <!-- Completed -->
+    <button
+      (click)="setFilter('Completed')"
+      class="filter-pill rounded-full px-4 py-1.5 text-sm font-medium border-2 flex items-center gap-1.5 transition-all"
+      [class.border-sky-500]="currentFilter() === 'Completed'"
+      [class.text-sky-500]="currentFilter() === 'Completed'"
+      [class.bg-sky-50]="currentFilter() === 'Completed'"
+      [class.border-slate-200]="currentFilter() !== 'Completed'"
+      [class.text-slate-500]="currentFilter() !== 'Completed'"
+      [class.bg-white]="currentFilter() !== 'Completed'"
+    >
+      <i class="fa-solid fa-check text-xs"></i>
+      Completed
+    </button>
+  </div>
+</div>

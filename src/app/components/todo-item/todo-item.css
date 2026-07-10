@@ -1,0 +1,75 @@
+.todo-item {
+    position: relative;
+    overflow: hidden;
+    transition: all .25s ease;
+}
+
+.todo-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #0ea5e9;
+    transform: scaleY(0);
+    transition: .25s;
+}
+
+.todo-item:hover::before {
+    transform: scaleY(1);
+}
+
+.todo-check {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    transition: all .25s ease;
+}
+
+.todo-check:hover {
+    transform: scale(1.1);
+}
+
+.todo-check.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.todo-check i {
+    font-size: 11px;
+}
+
+.todo-actions {
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.todo-item:hover .todo-actions {
+    opacity: 1;
+}
+
+.btn-action {
+    transition: all .2s ease;
+}
+
+.btn-action:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width:640px) {
+
+    .todo-actions {
+        opacity: 1;
+    }
+
+}

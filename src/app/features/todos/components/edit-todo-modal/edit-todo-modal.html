@@ -1,0 +1,43 @@
+<div
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
+  (click)="onClose()"
+>
+  <div
+    class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-scale"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-slate-800">Edit Task</h2>
+
+      <button class="text-slate-400 hover:text-red-500 transition" (click)="onClose()">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <label class="block text-sm font-medium text-slate-600 mb-2"> Task Name </label>
+
+    <input
+      type="text"
+      class="w-full border-2 border-slate-200 rounded-lg px-4 py-3 focus:border-sky-500 outline-none transition"
+      [ngModel]="title()"
+      (ngModelChange)="title.set($event)"
+      (keyup.enter)="onSave()"
+    />
+
+    <div class="flex justify-end gap-3 mt-6">
+      <button
+        class="px-5 py-2 rounded-lg border border-slate-300 hover:bg-slate-100 transition"
+        (click)="onClose()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="px-5 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white transition"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>

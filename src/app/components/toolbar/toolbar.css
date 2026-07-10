@@ -1,0 +1,14 @@
+.search-input:focus{
+    border-color:#0ea5e9;
+    box-shadow:0 0 0 4px rgb(14 165 233 /.1);
+    outline:none;
+}
+
+.filter-pill{
+    transition:.2s;
+}
+
+.filter-pill.active{
+    background:linear-gradient(135deg,#0ea5e9,#0284c7);
+    color:#fff;
+}

@@ -1,0 +1,65 @@
+<div class="todo-item flex items-center gap-4 px-6 py-4 border-b border-slate-100 animate-slide-in">
+  <div
+    class="todo-check w-6 h-6 rounded-full border-2 flex items-center justify-center cursor-pointer flex-shrink-0 transition-colors duration-200"
+    [ngClass]="
+      todo().status === 'Completed'
+        ? 'bg-emerald-500 border-emerald-500'
+        : 'bg-white border-slate-300'
+    "
+    (click)="onToggle()"
+  >
+    @if (todo().status === 'Completed') {
+      <i class="fa-solid fa-check text-white text-[10px]"></i>
+    }
+  </div>
+
+  <div class="flex-1 min-w-0">
+    <div
+      class="text-sm font-medium mb-1 truncate transition-colors"
+      [class.line-through]="todo().status === 'Completed'"
+      [class.text-slate-800]="todo().status !== 'Completed'"
+      [class.text-slate-400]="todo().status === 'Completed'"
+    >
+      {{ todo().title }}
+    </div>
+
+    <div class="flex items-center gap-3 text-xs">
+      <span class="text-slate-400 flex items-center gap-1">
+        <i class="fa-regular fa-calendar"></i>
+        {{ todo().createdAt | date: 'MMM d, y' }}
+      </span>
+
+      <span
+        class="w-2 h-2 rounded-full flex-shrink-0"
+        [class.bg-red-500]="todo().status === 'Pending'"
+        [class.bg-green-500]="todo().status === 'Completed'"
+      >
+      </span>
+
+      <span
+        class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
+        [class.bg-amber-50]="todo().status === 'Pending'"
+        [class.text-amber-700]="todo().status === 'Pending'"
+        [class.bg-green-50]="todo().status === 'Completed'"
+        [class.text-green-700]="todo().status === 'Completed'"
+      >
+        {{ todo().status }}
+      </span>
+    </div>
+  </div>
+
+  <div class="todo-actions flex gap-1">
+    <button
+      (click)="onEdit()"
+      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-sky-50 hover:text-sky-500 transition-colors"
+    >
+      <i class="fa-solid fa-pen text-xs"></i>
+    </button>
+    <button
+      (click)="onDelete()"
+      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+    >
+      <i class="fa-solid fa-trash text-xs"></i>
+    </button>
+  </div>
+</div>
