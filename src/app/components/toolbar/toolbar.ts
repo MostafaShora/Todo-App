@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TodoService } from '../../core/services/todo';
 import { TodoFilter } from '../../core/types/todo-filter.type';
 import { SortOption } from '../../core/types/sort-option.type';
@@ -15,6 +15,9 @@ export class Toolbar {
   currentFilter = this.todoService.filter;
   currentSort = this.todoService.sort;
 
+  isFilterOpen = signal(false);
+  isSortOpen = signal(false)
+
   onSearch(event: Event) {
 
     const value = (event.target as HTMLInputElement).value;
@@ -26,10 +29,12 @@ export class Toolbar {
 
   setFilter(filter: TodoFilter) {
     this.todoService.setFilter(filter);
+    this.closeFilter();
   }
 
   setSort(sort: SortOption) {
     this.todoService.setSort(sort);
+    this.closeSort()
   }
 
   currentSortLabel = computed(() => {
@@ -59,4 +64,44 @@ export class Toolbar {
     }
 
   });
+
+  currentFilterLabel = computed(() => {
+    switch (this.currentFilter()) {
+      case 'All':
+        return 'All Tasks';
+
+      case 'Pending':
+        return 'Pending';
+
+      case 'Completed':
+        return 'Completed';
+
+      case 'High':
+        return 'High Priority';
+
+      case 'Medium':
+        return 'Medium Priority';
+
+      case 'Low':
+        return 'Low Priority';
+    }
+  });
+
+  toggleFilter() {
+    this.isFilterOpen.update(value => !value);
+    this.isSortOpen.set(false);
+  }
+
+  toggleSort() {
+    this.isSortOpen.update(value => !value);
+    this.isFilterOpen.set(false);
+  }
+
+  closeFilter() {
+    this.isFilterOpen.set(false);
+  }
+
+  closeSort() {
+    this.isSortOpen.set(false);
+  }
 }

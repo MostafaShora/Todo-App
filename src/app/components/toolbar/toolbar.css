@@ -1,14 +1,68 @@
-.search-input:focus{
-    border-color:#0ea5e9;
-    box-shadow:0 0 0 4px rgb(14 165 233 /.1);
-    outline:none;
+.search-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 4px rgb(14 165 233 /0.1);
+  outline: none;
 }
 
-.filter-pill{
-    transition:.2s;
+.filter-pill {
+  transition: 0.2s;
 }
 
-.filter-pill.active{
-    background:linear-gradient(135deg,#0ea5e9,#0284c7);
-    color:#fff;
+.filter-pill.active {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: #fff;
+}
+
+.dropdown-item {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: white;
+  border: none;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.dropdown-item span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown-item:hover {
+  background: #f8fafc;
+}
+
+.dropdown-item i:last-child {
+  font-size: 13px;
+}
+
+.fa-chevron-down {
+  transition: transform 0.2s ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.animate-dropdown {
+  animation: dropdown 0.18s ease;
+}
+
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

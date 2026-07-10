@@ -1,1 +1,1 @@
-export type TodoFilter = 'All' | 'Pending' | 'Completed';
+export type TodoFilter = 'All' | 'Pending' | 'Completed' | 'High' | 'Medium' | 'Low';

@@ -52,12 +52,25 @@ export class TodoService {
         // Filter
 
         switch (this.filter()) {
+
             case 'Pending':
-                todos = todos.filter((todo) => todo.status === 'Pending');
+                todos = todos.filter(todo => todo.status === 'Pending');
                 break;
 
             case 'Completed':
-                todos = todos.filter((todo) => todo.status === 'Completed');
+                todos = todos.filter(todo => todo.status === 'Completed');
+                break;
+
+            case 'High':
+                todos = todos.filter(todo => todo.priority === 'High');
+                break;
+
+            case 'Medium':
+                todos = todos.filter(todo => todo.priority === 'Medium');
+                break;
+
+            case 'Low':
+                todos = todos.filter(todo => todo.priority === 'Low');
                 break;
 
             default:
@@ -87,7 +100,7 @@ export class TodoService {
             case 'NameDesc':
                 todos.sort((a, b) => b.title.localeCompare(a.title));
                 break;
-                
+
             case 'PriorityHigh':
                 todos.sort(
                     (a, b) =>
