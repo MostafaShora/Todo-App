@@ -16,7 +16,7 @@
     </div>
   } @else {
     @for (todo of todos(); track todo.id) {
-      <div cdkDrag>
+      <div>
         <app-todo-item
           [todo]="todo"
           (edit)="onEdit($event)"
