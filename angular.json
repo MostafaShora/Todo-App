@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ToDoApp2": {
+    "ToDoApp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ToDoApp2:build:production"
+              "buildTarget": "ToDoApp:build:production"
             },
             "development": {
-              "buildTarget": "ToDoApp2:build:development"
+              "buildTarget": "ToDoApp:build:development"
             }
           },
           "defaultConfiguration": "development"
