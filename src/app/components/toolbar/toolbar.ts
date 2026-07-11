@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { TodoService } from '../../core/services/todo';
 import { TodoFilter } from '../../core/types/todo-filter.type';
 import { SortOption } from '../../core/types/sort-option.type';
@@ -11,6 +11,7 @@ import { SortOption } from '../../core/types/sort-option.type';
 })
 export class Toolbar {
   private todoService = inject(TodoService);
+  private elementRef = inject(ElementRef)
 
   currentFilter = this.todoService.filter;
   currentSort = this.todoService.sort;
@@ -103,5 +104,15 @@ export class Toolbar {
 
   closeSort() {
     this.isSortOpen.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+
+    if(!clickedInside) {
+      this.closeFilter();
+      this.closeSort();
+    }
   }
 }
