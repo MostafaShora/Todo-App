@@ -17,7 +17,7 @@
     <span class="priority-label"> Priority </span>
 
     <div class="relative">
-      <button type="button" (click)="togglePriority()" class="priority-btn">
+      <button type="button" (click)="togglePriority(); $event.stopPropagation()" class="priority-btn">
         <div class="flex items-center gap-2">
           @switch (priority) {
             @case ('Low') {
