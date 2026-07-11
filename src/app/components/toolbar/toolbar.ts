@@ -17,13 +17,11 @@ export class Toolbar {
   currentSort = this.todoService.sort;
 
   isFilterOpen = signal(false);
-  isSortOpen = signal(false)
+  isSortOpen = signal(false);
 
   onSearch(event: Event) {
 
     const value = (event.target as HTMLInputElement).value;
-    console.log(value);
-
     this.todoService.setSearchTerm(value);
 
   }
@@ -35,7 +33,7 @@ export class Toolbar {
 
   setSort(sort: SortOption) {
     this.todoService.setSort(sort);
-    this.closeSort()
+    this.closeSort();
   }
 
   currentSortLabel = computed(() => {

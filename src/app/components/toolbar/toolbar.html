@@ -14,7 +14,7 @@
   <div class="relative">
     <button
       type="button"
-      (click)="toggleSort()"
+      (click)="toggleSort(); $event.stopPropagation()"
       class="border-2 border-slate-200 bg-white text-slate-600 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-sky-500 hover:text-sky-500 transition-all"
     >
       <i class="fa-solid fa-arrow-down-wide-short"></i>
@@ -132,7 +132,7 @@
   <div class="relative">
     <button
       type="button"
-      (click)="toggleFilter()"
+      (click)="toggleFilter(); $event.stopPropagation()"
       class="border-2 border-slate-200 bg-white text-slate-600 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-sky-500 hover:text-sky-500 transition"
     >
       <i class="fa-solid fa-filter"></i>
