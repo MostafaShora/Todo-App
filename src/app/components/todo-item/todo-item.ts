@@ -2,10 +2,11 @@ import { Component, input, output, signal } from '@angular/core';
 import { Todo } from '../../models/todo.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-item',
-  imports: [DatePipe, CommonModule, FormsModule],
+  imports: [DatePipe, CommonModule, FormsModule, DragDropModule],
   templateUrl: './todo-item.html',
   styleUrl: './todo-item.css',
 })

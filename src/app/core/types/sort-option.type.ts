@@ -1,1 +1,2 @@
-export type SortOption = 'Newest' | 'Oldest' | 'NameAsc' | 'NameDesc' | 'PriorityHigh' | 'PriorityLow';
+export type SortOption =
+    'Manual' | 'Newest' | 'Oldest' | 'NameAsc' | 'NameDesc' | 'PriorityHigh' | 'PriorityLow';

@@ -40,6 +40,22 @@
       <div
         class="absolute left-0 w-full sm:left-auto sm:right-0 sm:w-56 top-full mt-2 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-50 animate-dropdown"
       >
+        <!-- Manual -->
+        <button
+          type="button"
+          (click)="setSort('Manual')"
+          class="w-full flex items-center justify-between px-3 py-2 text-sm hover:bg-sky-50 transition"
+        >
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-grip-vertical w-4"></i>
+            Manual
+          </span>
+
+          @if (currentSort() === 'Manual') {
+            <i class="fa-solid fa-check text-sky-500"></i>
+          }
+        </button>
+
         <!-- Newest -->
         <button
           type="button"

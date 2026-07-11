@@ -3,9 +3,21 @@ import { TodoFilter } from '../types/todo-filter.type';
 import { Todo } from '../../models/todo.model';
 import { SortOption } from '../types/sort-option.type';
 import { Priority } from '../types/priority.type';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Service()
 export class TodoService {
+
+    // 1. State (Signals)
+    private readonly STORAGE_KEY = 'todos';
+
+    readonly todos = signal<Todo[]>(this.loadTodos());
+
+    readonly searchTerm = signal('');
+
+    readonly filter = signal<TodoFilter>('All');
+
+    readonly sort = signal<SortOption>('Manual');
 
     constructor() {
 
@@ -17,16 +29,6 @@ export class TodoService {
             )
         })
     }
-    // 1. State (Signals)
-    private readonly STORAGE_KEY = 'todos';
-
-    readonly todos = signal<Todo[]>(this.loadTodos());
-
-    readonly searchTerm = signal('');
-
-    readonly filter = signal<TodoFilter>('All');
-
-    readonly sort = signal<SortOption>('Newest');
 
 
     // 2. Computed (Derivations)
@@ -85,6 +87,10 @@ export class TodoService {
 
         // Sort
         switch (this.sort()) {
+            case 'Manual':
+                todos.sort((a, b) => a.order - b.order);
+                break;
+
             case 'Newest':
                 todos.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
                 break;
@@ -121,36 +127,6 @@ export class TodoService {
         return todos;
     });
 
-    private loadTodos(): Todo[] {
-
-        const data = localStorage.getItem(this.STORAGE_KEY);
-
-        if (!data) {
-            return [
-                {
-                    id: 1,
-                    title: 'Design new landing page',
-                    status: 'Pending',
-                    priority: 'High',
-                    createdAt: new Date(),
-                },
-                {
-                    id: 2,
-                    title: 'Review Pull Request',
-                    status: 'Completed',
-                    priority: 'High',
-                    createdAt: new Date(),
-                },
-            ];
-        }
-
-        return JSON.parse(data).map((todo: Todo) => ({
-            ...todo,
-            priority: todo.priority ?? 'Medium',
-            createdAt: new Date(todo.createdAt),
-        }))
-    };
-
     // 3. CRUD Operations
     addTodo(title: string, priority: Priority) {
         const todo: Todo = {
@@ -158,6 +134,7 @@ export class TodoService {
             title: title,
             status: 'Pending',
             priority,
+            order: this.todos().length,
             createdAt: new Date(),
         };
 
@@ -192,7 +169,7 @@ export class TodoService {
         );
     }
 
-    // 4. UI State Actions
+    // 4. View State
     setSearchTerm(value: string) {
         this.searchTerm.set(value);
     }
@@ -204,4 +181,59 @@ export class TodoService {
     setSort(sort: SortOption) {
         this.sort.set(sort);
     }
+
+    // 5. Reordering
+    reorderTodos(previousIndex: number, currentIndex: number) {
+        this.todos.update(currentTodos => {
+            const todos = [...currentTodos];
+
+            moveItemInArray(
+                todos,
+                previousIndex,
+                currentIndex
+            )
+
+            todos.forEach((todo, index) => {
+                todo.order = index;
+            })
+
+            return todos;
+        }
+        )
+    }
+
+
+    // 6. Persistence
+    private loadTodos(): Todo[] {
+
+        const data = localStorage.getItem(this.STORAGE_KEY);
+
+        if (!data) {
+            return [
+                {
+                    id: 1,
+                    title: 'Design new landing page',
+                    status: 'Pending',
+                    priority: 'High',
+                    order: 0,
+                    createdAt: new Date(),
+                },
+                {
+                    id: 2,
+                    title: 'Review Pull Request',
+                    status: 'Completed',
+                    priority: 'High',
+                    order: 1,
+                    createdAt: new Date(),
+                },
+            ];
+        }
+
+        return JSON.parse(data).map((todo: Todo, index: number) => ({
+            ...todo,
+            priority: todo.priority ?? 'Medium',
+            order: todo.order ?? index,
+            createdAt: new Date(todo.createdAt),
+        }))
+    };
 }

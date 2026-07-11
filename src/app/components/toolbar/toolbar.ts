@@ -41,6 +41,8 @@ export class Toolbar {
 
     switch (this.currentSort()) {
 
+      case 'Manual':
+        return 'Manual'
       case 'Newest':
         return 'Newest';
 

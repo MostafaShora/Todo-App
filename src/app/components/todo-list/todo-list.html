@@ -1,4 +1,4 @@
-<div class="py-2">
+<div class="py-2" cdkDropList (cdkDropListDropped)="onDrop($event)">
   @if (todos().length === 0) {
     <div class="py-20 flex flex-col items-center text-center">
       <i class="fa-regular fa-clipboard text-6xl text-slate-300 mb-5"></i>
@@ -11,13 +11,15 @@
     </div>
   } @else {
     @for (todo of todos(); track todo.id) {
-      <app-todo-item
-        [todo]="todo"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)"
-        (toggle)="toggleTodo($event)"
-      >
-      </app-todo-item>
+      <div cdkDrag>
+        <app-todo-item
+          [todo]="todo"
+          (edit)="onEdit($event)"
+          (delete)="onDelete($event)"
+          (toggle)="toggleTodo($event)"
+        >
+        </app-todo-item>
+      </div>
     }
   }
 </div>
