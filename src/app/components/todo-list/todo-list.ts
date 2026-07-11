@@ -16,6 +16,7 @@ export class TodoList {
   edit = output<Todo>();
 
   todos = this.todoService.filteredTodos;
+  currentSort = this.todoService.sort;
 
   delete = output<Todo>();
 
