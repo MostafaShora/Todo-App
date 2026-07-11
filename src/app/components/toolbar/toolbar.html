@@ -5,10 +5,22 @@
     ></i>
     <input
       type="text"
-      class="search-input w-full pl-10 pr-4 py-2 border-2 border-slate-200 rounded-lg text-sm bg-white transition-all placeholder:text-slate-400"
+      class="search-input w-full pl-10 pr-10 py-2 border-2 border-slate-200 rounded-lg text-sm bg-white transition-all placeholder:text-slate-400"
       placeholder="Search tasks..."
+      [value]="searchTerm()"
       (input)="onSearch($event)"
     />
+
+    @if (searchTerm()) {
+      <button
+        type="button"
+        (click)="clearSearch()"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-red-500 transition"
+        aria-label="Clear search"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    }
   </div>
 
   <div class="relative">

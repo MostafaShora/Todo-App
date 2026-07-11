@@ -19,11 +19,12 @@ export class Toolbar {
   isFilterOpen = signal(false);
   isSortOpen = signal(false);
 
+  searchTerm = this.todoService.searchTerm;
+
   onSearch(event: Event) {
 
     const value = (event.target as HTMLInputElement).value;
     this.todoService.setSearchTerm(value);
-
   }
 
   setFilter(filter: TodoFilter) {
@@ -108,9 +109,13 @@ export class Toolbar {
   onDocumentClick(event: MouseEvent) {
     const clickedInside = this.elementRef.nativeElement.contains(event.target);
 
-    if(!clickedInside) {
+    if (!clickedInside) {
       this.closeFilter();
       this.closeSort();
     }
+  }
+
+  clearSearch() {
+    this.todoService.setSearchTerm('');
   }
 }
