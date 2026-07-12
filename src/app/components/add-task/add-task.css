@@ -68,10 +68,12 @@
 }
 
 .priority-label {
-  width: 70px;
+  /* width: 70px; */
+  flex: 0 0 90px;
   color: #64748b;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .priority-wrapper {
