@@ -16,17 +16,17 @@ export class AddTask {
 
   private elementRef = inject(ElementRef)
 
-  riority = signal<Priority>('Medium');
+  priority = signal<Priority>('Medium');
+  dueDate = signal<string>('');
 
   isPriorityOpen = signal(false);
   taskTitle = '';
-  priority: Priority = 'Medium';
 
   addTask() {
     const title = this.taskTitle.trim();
     if (!title) return;
 
-    this.todoService.addTodo(title, this.priority);
+    this.todoService.addTodo(title, this.priority(), this.dueDate() ? new Date(this.dueDate()) : null);
 
     this.toastService.show(
       'Success',
@@ -34,7 +34,8 @@ export class AddTask {
     );
 
     this.taskTitle = '';
-    this.priority = 'Medium';
+    this.priority.set('Medium');
+    this.dueDate.set('');
 
   }
 
@@ -43,7 +44,7 @@ export class AddTask {
   }
 
   selectPriority(priority: Priority) {
-    this.priority = priority;
+    this.priority.set(priority);
     this.isPriorityOpen.set(false);
   }
 

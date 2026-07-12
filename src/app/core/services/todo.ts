@@ -128,27 +128,29 @@ export class TodoService {
     });
 
     // 3. CRUD Operations
-    addTodo(title: string, priority: Priority) {
+    addTodo(title: string, priority: Priority, dueDate: Date | null) {
         const todo: Todo = {
             id: Date.now(),
             title: title,
             status: 'Pending',
             priority,
             order: this.todos().length,
+            dueDate,
             createdAt: new Date(),
         };
 
         this.todos.update((todos) => [...todos, todo]);
     }
 
-    updateTodo(id: number, title: string, priority: Priority) {
+    updateTodo(id: number, title: string, priority: Priority, dueDate: Date | null) {
         this.todos.update((todos) =>
             todos.map((todo) =>
                 todo.id === id
                     ? {
                         ...todo,
                         title,
-                        priority
+                        priority,
+                        dueDate,
                     }
                     : todo,
             ),
@@ -216,6 +218,7 @@ export class TodoService {
                     status: 'Pending',
                     priority: 'High',
                     order: 0,
+                    dueDate: null,
                     createdAt: new Date(),
                 },
                 {
@@ -224,6 +227,7 @@ export class TodoService {
                     status: 'Completed',
                     priority: 'High',
                     order: 1,
+                    dueDate: null,
                     createdAt: new Date(),
                 },
             ];
@@ -233,6 +237,7 @@ export class TodoService {
             ...todo,
             priority: todo.priority ?? 'Medium',
             order: todo.order ?? index,
+            dueDate: todo.dueDate ? new Date(todo.dueDate) : null,
             createdAt: new Date(todo.createdAt),
         }))
     };

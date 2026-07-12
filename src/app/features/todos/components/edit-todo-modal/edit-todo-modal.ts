@@ -13,12 +13,15 @@ import { Priority } from '../../../../core/types/priority.type';
 export class EditTodoModal {
   todo = input.required<Todo>();
 
+  dueDate = signal<string>('');
+
   close = output<void>();
 
   save = output<{
     id: number;
     title: string;
     priority: Priority;
+    dueDate: Date | null;
   }>();
 
   title = signal('');
@@ -32,6 +35,10 @@ export class EditTodoModal {
 
       this.title.set(todo.title);
       this.priority.set(todo.priority);
+
+      this.dueDate.set(
+        todo.dueDate ? todo.dueDate.toISOString().split('T')[0] : '',
+      )
     });
   }
 
@@ -54,6 +61,7 @@ export class EditTodoModal {
       id: this.todo().id,
       title: value,
       priority: this.priority(),
+      dueDate: this.dueDate() ? new Date(this.dueDate()) : null
     });
   }
 

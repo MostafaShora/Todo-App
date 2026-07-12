@@ -42,12 +42,13 @@ export class Home {
     this.isEditModalOpen.set(false);
   }
 
-  saveTodo(event: { id: number; title: string; priority: Priority; }) {
+  saveTodo(event: { id: number; title: string; priority: Priority; dueDate: Date | null }) {
 
     this.todoService.updateTodo(
       event.id,
       event.title,
-      event.priority
+      event.priority,
+      event.dueDate
     );
 
     this.toastService.show(

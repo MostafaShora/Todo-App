@@ -8,5 +8,6 @@ export interface Todo {
   status: TodoStatus;
   priority: Priority;
   order: number;
+  dueDate: Date | null;
   createdAt: Date;
 }

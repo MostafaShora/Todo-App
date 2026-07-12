@@ -50,10 +50,17 @@
     </div>
 
     <div class="flex items-center gap-3 text-xs mt-2">
-      <span class="text-slate-400 flex items-center gap-1">
-        <i class="fa-regular fa-calendar"></i>
-        {{ todo().createdAt | date: 'MMM d, y' }}
-      </span>
+      @if (todo().dueDate) {
+        <span class="text-slate-400 flex items-center gap-1">
+          <i class="fa-regular fa-calendar-check"></i>
+          Due {{ todo().dueDate | date: 'MMM d, y' }}
+        </span>
+      } @else {
+        <span class="text-slate-400 flex items-center gap-1">
+          <i class="fa-regular fa-calendar-plus"></i>
+          Created {{ todo().createdAt | date: 'MMM d, y' }}
+        </span>
+      }
 
       <span
         class="w-2 h-2 rounded-full flex-shrink-0"
