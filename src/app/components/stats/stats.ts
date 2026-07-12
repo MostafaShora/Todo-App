@@ -19,6 +19,8 @@ export class Stats {
 
   pendingTodos = this.todoService.pendingTodos;
 
+  overdueTodos = this.todoService.overdueCountTodos;
+
   filteredTodos = computed(() => {
     const search = this.search().toLowerCase();
 

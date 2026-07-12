@@ -127,6 +127,10 @@ export class TodoService {
         return todos;
     });
 
+    overdueCountTodos = computed(() =>
+        this.todos().filter(todo => this.isOverdue(todo)).length
+    );
+
     // 3. CRUD Operations
     addTodo(title: string, priority: Priority, dueDate: Date | null) {
         const todo: Todo = {
@@ -251,6 +255,9 @@ export class TodoService {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        return todo.dueDate.getTime() < today.getTime();
+        const due = new Date(todo.dueDate);
+        due.setHours(0, 0, 0, 0);
+
+        return due < today;
     }
 }

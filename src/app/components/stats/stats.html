@@ -1,16 +1,22 @@
 <div
-  class="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up"
+  /* class="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up" */
+  class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 animate-fade-in-up"
   style="animation-delay: 0.1s; opacity: 0"
 >
+  <!-- Total -->
+
   <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
     <div
       class="w-11 h-11 rounded-xl bg-sky-50 text-sky-500 flex items-center justify-center mx-auto mb-3 text-lg"
     >
       <i class="fa-solid fa-list"></i>
     </div>
-    <div class="text-2xl font-bold text-slate-800 leading-none">{{totalTodos()}}</div>
+    <div class="text-2xl font-bold text-slate-800 leading-none">{{ totalTodos() }}</div>
     <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Total Tasks</div>
   </div>
+
+  <!-- Pending -->
+
   <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
     <div
       class="w-11 h-11 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto mb-3 text-lg"
@@ -20,6 +26,9 @@
     <div class="text-2xl font-bold text-slate-800 leading-none">{{ pendingTodos() }}</div>
     <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Pending</div>
   </div>
+
+  <!-- Completed -->
+
   <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
     <div
       class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center mx-auto mb-3 text-lg"
@@ -28,5 +37,29 @@
     </div>
     <div class="text-2xl font-bold text-slate-800 leading-none">{{ completedTodos() }}</div>
     <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Completed</div>
+  </div>
+
+  <!-- Overdue -->
+
+  <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
+    <div
+      class="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg"
+      [class.bg-red-50]="overdueTodos() > 0"
+      [class.text-red-500]="overdueTodos() > 0"
+      [class.bg-slate-100]="overdueTodos() === 0"
+      [class.text-slate-400]="overdueTodos() === 0"
+    >
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <div
+      class="text-2xl font-bold leading-none"
+      [class.text-red-600]="overdueTodos() > 0"
+      [class.text-slate-500]="overdueTodos() === 0"
+    >
+      {{ overdueTodos() }}
+    </div>
+
+    <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Overdue</div>
   </div>
 </div>
