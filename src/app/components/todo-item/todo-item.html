@@ -49,35 +49,52 @@
       }
     </div>
 
-    <div class="flex items-center gap-3 text-xs mt-2">
-      @if (todo().dueDate) {
-        <span class="text-slate-400 flex items-center gap-1">
-          <i class="fa-regular fa-calendar-check"></i>
-          Due {{ todo().dueDate | date: 'MMM d, y' }}
-        </span>
-      } @else {
-        <span class="text-slate-400 flex items-center gap-1">
-          <i class="fa-regular fa-calendar-plus"></i>
-          Created {{ todo().createdAt | date: 'MMM d, y' }}
-        </span>
-      }
+    <div class="mt-2 space-y-2">
+      <!-- Date -->
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        @if (todo().dueDate) {
+          <!-- <span class="text-slate-400 flex items-center gap-1"> -->
+          <span
+            class="flex items-center gap-1"
+            [class.text-red-600]="isOverdue()"
+            [class.text-slate-400]="!isOverdue()"
+          >
+            <i class="fa-regular fa-calendar-check"></i>
+            Due {{ todo().dueDate | date: 'MMM d, y' }}
+          </span>
+        } @else {
+          <span class="text-slate-400 flex items-center gap-1">
+            <i class="fa-regular fa-calendar-plus"></i>
+            Created {{ todo().createdAt | date: 'MMM d, y' }}
+          </span>
+        }
+      </div>
 
-      <span
-        class="w-2 h-2 rounded-full flex-shrink-0"
-        [class.bg-red-500]="todo().status === 'Pending'"
-        [class.bg-green-500]="todo().status === 'Completed'"
-      >
-      </span>
-
-      <span
-        class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
-        [class.bg-amber-50]="todo().status === 'Pending'"
-        [class.text-amber-700]="todo().status === 'Pending'"
-        [class.bg-green-50]="todo().status === 'Completed'"
-        [class.text-green-700]="todo().status === 'Completed'"
-      >
-        {{ todo().status }}
-      </span>
+      <!-- Status -->
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <span
+          class="w-2 h-2 rounded-full flex-shrink-0"
+          [class.bg-red-500]="todo().status === 'Pending'"
+          [class.bg-green-500]="todo().status === 'Completed'"
+        >
+        </span>
+        @if (isOverdue()) {
+          <span
+            class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-red-100 text-red-700"
+          >
+            Overdue
+          </span>
+        }
+        <span
+          class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
+          [class.bg-amber-50]="todo().status === 'Pending'"
+          [class.text-amber-700]="todo().status === 'Pending'"
+          [class.bg-green-50]="todo().status === 'Completed'"
+          [class.text-green-700]="todo().status === 'Completed'"
+        >
+          {{ todo().status }}
+        </span>
+      </div>
     </div>
   </div>
 

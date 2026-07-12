@@ -241,4 +241,16 @@ export class TodoService {
             createdAt: new Date(todo.createdAt),
         }))
     };
+
+    //7 . Helpers
+    isOverdue(todo: Todo) {
+        if (!todo.dueDate || todo.status === 'Completed') {
+            return false;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        return todo.dueDate.getTime() < today.getTime();
+    }
 }
