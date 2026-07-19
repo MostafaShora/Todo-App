@@ -11,6 +11,7 @@ import { ConfirmModal } from "../../shared/components/confirm-modal/confirm-moda
 import { Toast } from "../../shared/components/toast/toast";
 import { ToastService } from '../../shared/services/toast';
 import { Priority } from '../../core/types/priority.type';
+import { Category } from '../../core/types/category.type';
 
 @Component({
   selector: 'app-home',
@@ -42,12 +43,13 @@ export class Home {
     this.isEditModalOpen.set(false);
   }
 
-  saveTodo(event: { id: number; title: string; priority: Priority; dueDate: Date | null }) {
+  saveTodo(event: { id: number; title: string; priority: Priority; category: Category; dueDate: Date | null }) {
 
     this.todoService.updateTodo(
       event.id,
       event.title,
       event.priority,
+      event.category,
       event.dueDate
     );
 

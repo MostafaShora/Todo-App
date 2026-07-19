@@ -14,11 +14,10 @@
   </div>
 
   <!-- Priority + Due Date -->
-  <div class="flex flex-col md:flex-row gap-4 mt-4">
-    <div class="flex-1 relative">
+  <div class="fields-grid">
+    <div class="field relative">
       <!-- Priority -->
-      <div class="priority-row">
-        <span class="priority-label"> Priority </span>
+        <label class="field-label">Priority</label>
 
         <div class="relative">
           <button
@@ -84,14 +83,12 @@
             </div>
           }
         </div>
-      </div>
     </div>
 
     <!-- Due Date -->
 
-    <div class="flex-1 relative">
-      <div class="priority-row">
-        <span class="priority-label">Due Date</span>
+    <div class="field relative">
+        <label class="field-label">Due Date</label>
 
         <input
           type="date"
@@ -100,6 +97,106 @@
           (ngModelChange)="dueDate.set($event)"
         />
       </div>
+
+    <!-- Category -->
+    <div class="field relative">
+        <label class="field-label">Category</label>
+
+        <button
+          type="button"
+          class="priority-btn w-full"
+          (click)="toggleCategory(); $event.stopPropagation()"
+        >
+          <div class="flex items-center gap-2">
+            @switch (category()) {
+              @case ('Work') {
+                <i class="fa-solid fa-briefcase text-sky-500"></i>
+              }
+
+              @case ('Personal') {
+                <i class="fa-solid fa-user text-pink-500"></i>
+              }
+
+              @case ('Study') {
+                <i class="fa-solid fa-book text-indigo-500"></i>
+              }
+
+              @case ('Shopping') {
+                <i class="fa-solid fa-cart-shopping text-orange-500"></i>
+              }
+
+              @case ('Health') {
+                <i class="fa-solid fa-heart-pulse text-red-500"></i>
+              }
+            }
+
+            <span>{{ category() }}</span>
+          </div>
+
+          <i
+            class="fa-solid fa-chevron-down transition-transform duration-200"
+            [class.rotate-180]="isCategoryOpen()"
+          ></i>
+        </button>
+
+        @if (isCategoryOpen()) {
+          <div class="priority-menu">
+            <button class="priority-item" (click)="selectCategory('Work')">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-briefcase text-sky-500"></i>
+                Work
+              </div>
+
+              @if (category() === 'Work') {
+                <i class="fa-solid fa-check text-sky-500"></i>
+              }
+            </button>
+
+            <button class="priority-item" (click)="selectCategory('Personal')">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-user text-pink-500"></i>
+                Personal
+              </div>
+
+              @if (category() === 'Personal') {
+                <i class="fa-solid fa-check text-pink-500"></i>
+              }
+            </button>
+
+            <button class="priority-item" (click)="selectCategory('Study')">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-book text-indigo-500"></i>
+                Study
+              </div>
+
+              @if (category() === 'Study') {
+                <i class="fa-solid fa-check text-indigo-500"></i>
+              }
+            </button>
+
+            <button class="priority-item" (click)="selectCategory('Shopping')">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-orange-500"></i>
+                Shopping
+              </div>
+
+              @if (category() === 'Shopping') {
+                <i class="fa-solid fa-check text-orange-500"></i>
+              }
+            </button>
+
+            <button class="priority-item" (click)="selectCategory('Health')">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-heart-pulse text-red-500"></i>
+                Health
+              </div>
+
+              @if (category() === 'Health') {
+                <i class="fa-solid fa-check text-red-500"></i>
+              }
+            </button>
+          </div>
+        }
     </div>
   </div>
 </div>

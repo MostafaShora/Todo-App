@@ -2,6 +2,7 @@ import { Component, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../../../models/todo.model';
 import { Priority } from '../../../../core/types/priority.type';
+import { Category } from '../../../../core/types/category.type';
 
 @Component({
   selector: 'app-edit-todo-modal',
@@ -21,13 +22,17 @@ export class EditTodoModal {
     id: number;
     title: string;
     priority: Priority;
+    category: Category;
     dueDate: Date | null;
   }>();
 
   title = signal('');
 
   priority = signal<Priority>('Low');
+  category = signal<Category>('Personal');
+
   isPriorityOpen = signal(false)
+  isCategoryOpen = signal(false);
 
   constructor() {
     effect(() => {
@@ -35,7 +40,7 @@ export class EditTodoModal {
 
       this.title.set(todo.title);
       this.priority.set(todo.priority);
-
+      this.category.set(todo.category);
       this.dueDate.set(
         todo.dueDate ? todo.dueDate.toISOString().split('T')[0] : '',
       )
@@ -46,13 +51,22 @@ export class EditTodoModal {
     this.isPriorityOpen.update(value => !value);
   }
 
+  toggleCategory() {
+  this.isCategoryOpen.update(v => !v);
+}
+
   selectPriority(priority: Priority) {
     this.priority.set(priority);
+    
     this.isPriorityOpen.set(false);
   }
 
+  selectCategory(category: Category) {
+  this.category.set(category);
+  this.isCategoryOpen.set(false);
+}
+
   onSave() {
-    console.log('Modal Save');
     const value = this.title().trim();
 
     if (!value) return;
@@ -61,6 +75,7 @@ export class EditTodoModal {
       id: this.todo().id,
       title: value,
       priority: this.priority(),
+      category: this.category(),
       dueDate: this.dueDate() ? new Date(this.dueDate()) : null
     });
   }

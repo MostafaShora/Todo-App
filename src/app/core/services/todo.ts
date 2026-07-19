@@ -4,6 +4,7 @@ import { Todo } from '../../models/todo.model';
 import { SortOption } from '../types/sort-option.type';
 import { Priority } from '../types/priority.type';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { Category } from '../types/category.type';
 
 @Service()
 export class TodoService {
@@ -132,13 +133,14 @@ export class TodoService {
     );
 
     // 3. CRUD Operations
-    addTodo(title: string, priority: Priority, dueDate: Date | null) {
+    addTodo(title: string, priority: Priority, category: Category, dueDate: Date | null) {
         const todo: Todo = {
             id: Date.now(),
             title: title,
             status: 'Pending',
             priority,
             order: this.todos().length,
+            category,
             dueDate,
             createdAt: new Date(),
         };
@@ -146,7 +148,7 @@ export class TodoService {
         this.todos.update((todos) => [...todos, todo]);
     }
 
-    updateTodo(id: number, title: string, priority: Priority, dueDate: Date | null) {
+    updateTodo(id: number, title: string, priority: Priority, category: Category, dueDate: Date | null) {
         this.todos.update((todos) =>
             todos.map((todo) =>
                 todo.id === id
@@ -154,6 +156,7 @@ export class TodoService {
                         ...todo,
                         title,
                         priority,
+                        category,
                         dueDate,
                     }
                     : todo,
@@ -222,6 +225,7 @@ export class TodoService {
                     status: 'Pending',
                     priority: 'High',
                     order: 0,
+                    category: 'Work',
                     dueDate: null,
                     createdAt: new Date(),
                 },
@@ -231,6 +235,7 @@ export class TodoService {
                     status: 'Completed',
                     priority: 'High',
                     order: 1,
+                    category: 'Work',
                     dueDate: null,
                     createdAt: new Date(),
                 },
@@ -240,6 +245,7 @@ export class TodoService {
         return JSON.parse(data).map((todo: Todo, index: number) => ({
             ...todo,
             priority: todo.priority ?? 'Medium',
+            category: todo.category ?? 'Personal',
             order: todo.order ?? index,
             dueDate: todo.dueDate ? new Date(todo.dueDate) : null,
             createdAt: new Date(todo.createdAt),
