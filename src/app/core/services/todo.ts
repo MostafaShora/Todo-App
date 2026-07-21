@@ -76,6 +76,14 @@ export class TodoService {
                 todos = todos.filter(todo => todo.priority === 'Low');
                 break;
 
+            case 'Work':
+            case 'Personal':
+            case 'Study':
+            case 'Shopping':
+            case 'Health':
+                todos = todos.filter(todo => todo.category === this.filter());
+                break;
+
             default:
                 break;
         }

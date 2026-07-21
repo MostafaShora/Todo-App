@@ -86,6 +86,21 @@ export class Toolbar {
 
       case 'Low':
         return 'Low Priority';
+
+      case 'Work':
+        return 'Work';
+
+      case 'Personal':
+        return 'Personal';
+
+      case 'Study':
+        return 'Study';
+
+      case 'Shopping':
+        return 'Shopping';
+
+      case 'Health':
+        return 'Health';
     }
   });
 
