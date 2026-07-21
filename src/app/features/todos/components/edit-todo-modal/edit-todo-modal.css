@@ -33,7 +33,7 @@
 .priority-btn:focus-visible {
   outline: none;
   border-color: #0ea5e9;
-  box-shadow: 0 0 0 4px rgba(14,165,233,.12);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
 }
 
 .priority-menu {
@@ -73,6 +73,18 @@
 .priority-item:hover {
   background: #f8fafc;
   padding-left: 22px;
+}
+
+.priority-btn,
+.category-btn {
+  appearance: none;
+  -webkit-appearance: none;
+
+  height: 56px;
+
+  border: 2px solid #e2e8f0;
+  border-radius: 7px;
+  background: white;
 }
 
 @keyframes scaleIn {

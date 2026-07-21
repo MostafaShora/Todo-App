@@ -1,4 +1,4 @@
-import { Component, effect, input, output, signal } from '@angular/core';
+import { afterNextRender, Component, effect, ElementRef, HostListener, inject, input, output, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../../../models/todo.model';
 import { Priority } from '../../../../core/types/priority.type';
@@ -12,6 +12,11 @@ import { Category } from '../../../../core/types/category.type';
   styleUrl: './edit-todo-modal.css',
 })
 export class EditTodoModal {
+
+  private elementRef = inject(ElementRef);
+
+  titleInput = viewChild<ElementRef<HTMLInputElement>>('titleInput');
+
   todo = input.required<Todo>();
 
   dueDate = signal<string>('');
@@ -42,29 +47,37 @@ export class EditTodoModal {
       this.priority.set(todo.priority);
       this.category.set(todo.category);
       this.dueDate.set(
-        todo.dueDate ? todo.dueDate.toISOString().split('T')[0] : '',
-      )
+        todo.dueDate
+          ? todo.dueDate.toISOString().split('T')[0]
+          : ''
+      );
+    });
+
+    afterNextRender(() => {
+      this.titleInput()?.nativeElement.focus();
     });
   }
 
   togglePriority() {
+    this.isCategoryOpen.set(false);
     this.isPriorityOpen.update(value => !value);
   }
 
   toggleCategory() {
-  this.isCategoryOpen.update(v => !v);
-}
+    this.isPriorityOpen.set(false);
+    this.isCategoryOpen.update(v => !v);
+  }
 
   selectPriority(priority: Priority) {
     this.priority.set(priority);
-    
+
     this.isPriorityOpen.set(false);
   }
 
   selectCategory(category: Category) {
-  this.category.set(category);
-  this.isCategoryOpen.set(false);
-}
+    this.category.set(category);
+    this.isCategoryOpen.set(false);
+  }
 
   onSave() {
     const value = this.title().trim();
@@ -82,5 +95,22 @@ export class EditTodoModal {
 
   onClose() {
     this.close.emit();
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.onClose();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+
+    if (!clickedInside) {
+      this.isPriorityOpen.set(false);
+      this.isCategoryOpen.set(false);
+    }
+
   }
 }

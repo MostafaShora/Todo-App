@@ -19,6 +19,7 @@
     <label class="block text-sm font-medium text-slate-600 mb-2"> Task Name </label>
 
     <input
+      #titleInput
       type="text"
       class="w-full border-2 border-slate-200 rounded-lg px-4 py-3 focus:border-sky-500 outline-none transition"
       [ngModel]="title()"
@@ -34,8 +35,8 @@
       <div class="relative">
         <button
           type="button"
-          (click)="togglePriority()"
           class="priority-btn"
+          (click)="$event.stopPropagation(); togglePriority()"
           [class.open]="isPriorityOpen()"
         >
           <div class="flex items-center gap-2">
@@ -106,8 +107,8 @@
       <div class="relative">
         <button
           type="button"
-          (click)="toggleCategory()"
           class="priority-btn"
+          (click)="$event.stopPropagation(); toggleCategory()"
           [class.open]="isCategoryOpen()"
         >
           <div class="flex items-center gap-2">
