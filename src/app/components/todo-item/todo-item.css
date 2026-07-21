@@ -61,20 +61,13 @@
 }
 
 .todo-actions {
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  opacity: 1;
+  transform: none;
 }
 
 .todo-item:hover .todo-actions {
   opacity: 1;
-}
-
-.btn-action {
-  transition: all 0.2s ease;
-}
-
-.btn-action:hover {
-  transform: scale(1.1);
+  transform: translateX(0);
 }
 
 @media (max-width: 640px) {
@@ -91,12 +84,11 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 6px;
   padding: 3px 9px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   transition: all 0.25s ease;
 }
@@ -120,8 +112,34 @@
   color: #dc2626;
 }
 
-.todo-item:hover .todo-priority{
-    transform: translateY(-1px);
+.todo-item:hover .todo-priority {
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   Category Badge
+=========================== */
+
+.todo-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  /* background: #f8fafc; */
+  /* color: #475569; */
+  font-size: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.todo-category i {
+  font-size: 11px;
+  color: inherit;
+}
+
+.todo-item:hover .todo-category {
+  transform: translateY(-1px);
 }
 
 /* Animate Drag */

@@ -94,7 +94,6 @@
   border-radius: 16px;
   overflow: hidden;
   max-height: 240px;
-  overflow-y: auto;
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
   animation: dropdown 0.18s ease;
   z-index: 100;

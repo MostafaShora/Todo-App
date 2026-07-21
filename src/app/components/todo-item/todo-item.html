@@ -30,30 +30,68 @@
       {{ todo().title }}
     </div>
 
-    <div class="todo-priority" [class]="todo().priority.toLowerCase()">
-      @switch (todo().priority) {
-        @case ('Low') {
-          <i class="fa-solid fa-circle"></i>
-          <span>Low</span>
+    <div class="mt-2 flex flex-wrap gap-2">
+      <!-- Priority -->
+      <div class="todo-priority" [class]="todo().priority.toLowerCase()">
+        @switch (todo().priority) {
+          @case ('Low') {
+            <i class="fa-solid fa-circle"></i>
+            <span>Low</span>
+          }
+
+          @case ('Medium') {
+            <i class="fa-solid fa-circle"></i>
+            <span>Medium</span>
+          }
+
+          @case ('High') {
+            <i class="fa-solid fa-circle"></i>
+            <span>High</span>
+          }
+        }
+      </div>
+
+      <!-- Category -->
+      <div
+        class="todo-category"
+        [ngClass]="{
+          'bg-sky-50 text-sky-600': todo().category === 'Work',
+          'bg-pink-50 text-pink-600': todo().category === 'Personal',
+          'bg-indigo-50 text-indigo-600': todo().category === 'Study',
+          'bg-orange-50 text-orange-600': todo().category === 'Shopping',
+          'bg-red-50 text-red-600': todo().category === 'Health',
+        }"
+      >
+        @switch (todo().category) {
+          @case ('Work') {
+            <i class="fa-solid fa-briefcase"></i>
+          }
+
+          @case ('Personal') {
+            <i class="fa-solid fa-user"></i>
+          }
+
+          @case ('Study') {
+            <i class="fa-solid fa-book"></i>
+          }
+
+          @case ('Shopping') {
+            <i class="fa-solid fa-cart-shopping"></i>
+          }
+
+          @case ('Health') {
+            <i class="fa-solid fa-heart-pulse"></i>
+          }
         }
 
-        @case ('Medium') {
-          <i class="fa-solid fa-circle"></i>
-          <span>Medium</span>
-        }
-
-        @case ('High') {
-          <i class="fa-solid fa-circle"></i>
-          <span>High</span>
-        }
-      }
+        <span>{{ todo().category }}</span>
+      </div>
     </div>
 
-    <div class="mt-2 space-y-2">
+    <div class="mt-3 flex flex-wrap items-center gap-3 text-xs">
       <!-- Date -->
       <div class="flex items-center gap-2 text-xs">
         @if (todo().dueDate) {
-          <!-- <span class="text-slate-400 flex items-center gap-1"> -->
           <span
             class="flex items-center gap-1"
             [class.text-red-600]="isOverdue()"
@@ -78,13 +116,7 @@
           [class.bg-green-500]="todo().status === 'Completed'"
         >
         </span>
-        <!-- @if (isOverdue()) {
-          <span
-            class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-red-100 text-red-700"
-          >
-            Overdue
-          </span>
-        } -->
+
         <span
           class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
           [class.bg-amber-50]="todo().status === 'Pending'"
@@ -98,7 +130,7 @@
     </div>
   </div>
 
-  <div class="todo-actions flex gap-1">
+  <div class="todo-actions flex gap-1 ml-3">
     <button
       (click)="onEdit()"
       class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-sky-50 hover:text-sky-500 transition-colors"
