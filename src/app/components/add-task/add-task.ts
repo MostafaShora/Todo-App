@@ -45,10 +45,12 @@ export class AddTask {
   }
 
   togglePriority() {
+    this.isCategoryOpen.set(false);
     this.isPriorityOpen.update(v => !v);
   }
 
   toggleCategory() {
+    this.isPriorityOpen.set(false);
     this.isCategoryOpen.update(v => !v);
   }
 
