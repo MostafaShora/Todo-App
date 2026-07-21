@@ -33,7 +33,7 @@
 }
 
 .btn-add {
-  flex: 0 0 180px;
+  width: 180px;
   height: 56px;
   border: none;
   border-radius: 16px;
@@ -172,7 +172,7 @@
   }
 
   .add-input {
-    height: 56px;
+    height: 48px;
     font-size: 16px;
   }
 
