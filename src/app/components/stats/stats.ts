@@ -11,8 +11,6 @@ import { FormsModule } from '@angular/forms';
 export class Stats {
   private todoService = inject(TodoService);
 
-  search = signal('');
-
   totalTodos = this.todoService.totalTodos;
 
   completedTodos = this.todoService.completedTodos;
@@ -20,12 +18,4 @@ export class Stats {
   pendingTodos = this.todoService.pendingTodos;
 
   overdueTodos = this.todoService.overdueCountTodos;
-
-  filteredTodos = computed(() => {
-    const search = this.search().toLowerCase();
-
-    return this.todoService.todos().filter(todo =>
-      todo.title.toLowerCase().includes(search)
-    );
-  });
 }

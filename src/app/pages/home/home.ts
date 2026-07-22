@@ -33,7 +33,6 @@ export class Home {
   isDeleteModalOpen = signal(false);
 
   openEdit(todo: Todo) {
-    console.log('Home', todo);
     this.selectedTodo.set(todo);
     this.isEditModalOpen.set(true);
   }
