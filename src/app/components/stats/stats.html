@@ -5,61 +5,93 @@
 >
   <!-- Total -->
 
-  <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
+  <div
+    class="stat-card bg-white dark:bg-slate-900 rounded-xl p-5 text-center shadow-md border border-slate-100 dark:border-slate-700"
+  >
     <div
-      class="w-11 h-11 rounded-xl bg-sky-50 text-sky-500 flex items-center justify-center mx-auto mb-3 text-lg"
+      class="w-11 h-11 rounded-xl bg-sky-50 dark:bg-sky-900/30 text-sky-500 dark:text-sky-300 flex items-center justify-center mx-auto mb-3 text-lg"
     >
       <i class="fa-solid fa-list"></i>
     </div>
-    <div class="text-2xl font-bold text-slate-800 leading-none">{{ totalTodos() }}</div>
-    <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Total Tasks</div>
+    <div class="text-2xl font-bold text-slate-800 dark:text-slate-100 leading-none">
+      {{ totalTodos() }}
+    </div>
+    <div
+      class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium uppercase tracking-wider"
+    >
+      Total Tasks
+    </div>
   </div>
 
   <!-- Pending -->
 
-  <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
+  <div
+    class="stat-card bg-white dark:bg-slate-900 rounded-xl p-5 text-center shadow-md border border-slate-100 dark:border-slate-700"
+  >
     <div
-      class="w-11 h-11 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto mb-3 text-lg"
+      class="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-500 dark:text-amber-300 flex items-center justify-center mx-auto mb-3 text-lg"
     >
       <i class="fa-solid fa-clock"></i>
     </div>
-    <div class="text-2xl font-bold text-slate-800 leading-none">{{ pendingTodos() }}</div>
-    <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Pending</div>
+    <div class="text-2xl font-bold text-slate-800 dark:text-slate-100 leading-none">
+      {{ pendingTodos() }}
+    </div>
+    <div
+      class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium uppercase tracking-wider"
+    >
+      Pending
+    </div>
   </div>
 
   <!-- Completed -->
 
-  <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
+  <div
+    class="stat-card bg-white dark:bg-slate-900 rounded-xl p-5 text-center shadow-md border border-slate-100 dark:border-slate-700"
+  >
     <div
-      class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center mx-auto mb-3 text-lg"
+      class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-300 flex items-center justify-center mx-auto mb-3 text-lg"
     >
       <i class="fa-solid fa-circle-check"></i>
     </div>
-    <div class="text-2xl font-bold text-slate-800 leading-none">{{ completedTodos() }}</div>
-    <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Completed</div>
+    <div class="text-2xl font-bold text-slate-800 dark:text-slate-100 leading-none">
+      {{ completedTodos() }}
+    </div>
+    <div
+      class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium uppercase tracking-wider"
+    >
+      Completed
+    </div>
   </div>
 
   <!-- Overdue -->
 
-  <div class="stat-card bg-white rounded-xl p-5 text-center shadow-md border border-slate-100">
+  <div
+    class="stat-card bg-white dark:bg-slate-900 rounded-xl p-5 text-center shadow-md border border-slate-100 dark:border-slate-700"
+  >
     <div
       class="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg"
-      [class.bg-red-50]="overdueTodos() > 0"
-      [class.text-red-500]="overdueTodos() > 0"
-      [class.bg-slate-100]="overdueTodos() === 0"
-      [class.text-slate-400]="overdueTodos() === 0"
+      [ngClass]="{
+        'bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400': overdueTodos() > 0,
+        'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500': overdueTodos() === 0,
+      }"
     >
       <i class="fa-solid fa-triangle-exclamation"></i>
     </div>
 
     <div
       class="text-2xl font-bold leading-none"
-      [class.text-red-600]="overdueTodos() > 0"
-      [class.text-slate-500]="overdueTodos() === 0"
+      [ngClass]="{
+        'text-red-600 dark:text-red-400': overdueTodos() > 0,
+        'text-slate-500 dark:text-slate-400': overdueTodos() === 0,
+      }"
     >
       {{ overdueTodos() }}
     </div>
 
-    <div class="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wider">Overdue</div>
+    <div
+      class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-medium uppercase tracking-wider"
+    >
+      Overdue
+    </div>
   </div>
 </div>

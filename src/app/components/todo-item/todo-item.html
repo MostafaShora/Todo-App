@@ -1,5 +1,5 @@
 <div
-  class="todo-item flex items-center gap-4 px-6 py-4 border-b border-slate-100 animate-slide-in hover:bg-slate-50"
+  class="todo-item flex items-center gap-4 px-6 py-4 border-b border-slate-100 dark:border-slate-700 animate-slide-in hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
   [class.low]="todo().priority === 'Low'"
   [class.medium]="todo().priority === 'Medium'"
   [class.high]="todo().priority === 'High'"
@@ -11,7 +11,7 @@
     [ngClass]="
       todo().status === 'Completed'
         ? 'bg-emerald-500 border-emerald-500'
-        : 'bg-white border-slate-300'
+        : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600'
     "
     (click)="onToggle()"
   >
@@ -24,15 +24,28 @@
     <div
       class="text-sm font-medium mb-1 truncate transition-colors"
       [class.line-through]="todo().status === 'Completed'"
-      [class.text-slate-800]="todo().status !== 'Completed'"
-      [class.text-slate-400]="todo().status === 'Completed'"
+      [ngClass]="{
+        'text-slate-800 dark:text-slate-100': todo().status !== 'Completed',
+        'text-slate-400 dark:text-slate-500 line-through': todo().status === 'Completed',
+      }"
     >
       {{ todo().title }}
     </div>
 
     <div class="mt-2 flex flex-wrap gap-2">
       <!-- Priority -->
-      <div class="todo-priority" [class]="todo().priority.toLowerCase()">
+      <div
+        class="todo-priority"
+        [ngClass]="{
+          'bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300':
+            todo().priority === 'Low',
+
+          'bg-amber-50 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300':
+            todo().priority === 'Medium',
+
+          'bg-red-50 dark:bg-red-900/40 text-red-600 dark:text-red-300': todo().priority === 'High',
+        }"
+      >
         @switch (todo().priority) {
           @case ('Low') {
             <i class="fa-solid fa-circle"></i>
@@ -55,11 +68,15 @@
       <div
         class="todo-category"
         [ngClass]="{
-          'bg-sky-50 text-sky-600': todo().category === 'Work',
-          'bg-pink-50 text-pink-600': todo().category === 'Personal',
-          'bg-indigo-50 text-indigo-600': todo().category === 'Study',
-          'bg-orange-50 text-orange-600': todo().category === 'Shopping',
-          'bg-red-50 text-red-600': todo().category === 'Health',
+          'bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-300': todo().category === 'Work',
+          'bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-300':
+            todo().category === 'Personal',
+          'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300':
+            todo().category === 'Study',
+          'bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300':
+            todo().category === 'Shopping',
+          'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300':
+            todo().category === 'Health',
         }"
       >
         @switch (todo().category) {
@@ -94,14 +111,16 @@
         @if (todo().dueDate) {
           <span
             class="flex items-center gap-1"
-            [class.text-red-600]="isOverdue()"
-            [class.text-slate-400]="!isOverdue()"
+            [ngClass]="{
+              'text-red-600 dark:text-red-400': isOverdue(),
+              'text-slate-400 dark:text-slate-500': !isOverdue(),
+            }"
           >
             <i class="fa-regular fa-calendar-check"></i>
             {{ relativeDueDate() }}
           </span>
         } @else {
-          <span class="text-slate-400 flex items-center gap-1">
+          <span class="text-slate-400 dark:text-slate-500 flex items-center gap-1">
             <i class="fa-regular fa-calendar-plus"></i>
             Created {{ todo().createdAt | date: 'MMM d, y' }}
           </span>
@@ -119,10 +138,12 @@
 
         <span
           class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide"
-          [class.bg-amber-50]="todo().status === 'Pending'"
-          [class.text-amber-700]="todo().status === 'Pending'"
-          [class.bg-green-50]="todo().status === 'Completed'"
-          [class.text-green-700]="todo().status === 'Completed'"
+          [ngClass]="{
+            'bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300':
+              todo().status === 'Pending',
+            'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300':
+              todo().status === 'Completed',
+          }"
         >
           {{ todo().status }}
         </span>
@@ -133,13 +154,13 @@
   <div class="todo-actions flex gap-1 ml-3">
     <button
       (click)="onEdit()"
-      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-sky-50 hover:text-sky-500 transition-colors"
+      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-sky-50 dark:hover:bg-slate-700 hover:text-sky-500 dark:hover:text-sky-400 transition-colors"
     >
       <i class="fa-solid fa-pen text-xs"></i>
     </button>
     <button
       (click)="onDelete()"
-      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+      class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 dark:text-slate-500 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-500 dark:hover:text-red-400 transition-colors"
     >
       <i class="fa-solid fa-trash text-xs"></i>
     </button>

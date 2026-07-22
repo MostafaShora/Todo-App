@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TodoService } from '../../core/services/todo';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stats',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './stats.html',
   styleUrl: './stats.css',
 })
