@@ -1,6 +1,7 @@
 .search-input:focus {
+  box-shadow: 0 0 0 4px rgb(14 165 233 / 0.2);
   border-color: #0ea5e9;
-  box-shadow: 0 0 0 4px rgb(14 165 233 /0.1);
+
   outline: none;
 }
 
@@ -22,21 +23,26 @@
   justify-content: space-between;
   align-items: center;
 
-  background: white;
+  background: transparent;
   border: none;
   cursor: pointer;
+  color: inherit;
 
-  transition: 0.2s;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(240 249 255); /* نفس hover:bg-sky-50 */
+}
+
+:host-context(.dark) .dropdown-item:hover {
+  background-color: rgb(30 41 59); /* نفس dark:hover:bg-slate-800 */
 }
 
 .dropdown-item span {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.dropdown-item:hover {
-  background: #f8fafc;
 }
 
 .dropdown-item i:last-child {
