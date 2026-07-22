@@ -1,133 +1,22 @@
-.todo-item {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s ease;
-}
-
-.todo-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  transform: scaleY(0);
-  transition: 0.25s;
-}
-
-.todo-item.low::before {
-  background: #22c55e;
-}
-
-.todo-item.medium::before {
-  background: #f59e0b;
-}
-
-.todo-item.high::before {
-  background: #ef4444;
-}
-
-.todo-item:hover::before {
-  transform: scaleY(1);
-}
-
-.todo-check:hover {
-  transform: scale(1.1);
-}
-
-.todo-check i {
-  font-size: 11px;
-}
-
-.todo-actions {
-  opacity: 1;
-  transform: none;
-}
-
-.todo-item:hover .todo-actions {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@media (max-width: 640px) {
-  .todo-actions {
-    opacity: 1;
-  }
-}
-
-/* ===========================
-   Priority Badge
-=========================== */
-
-.todo-priority {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  transition: background-color .25s ease;
-}
-
-.todo-priority i {
-  font-size: 7px;
-}
-
-.todo-item:hover .todo-priority {
-  transform: translateY(-1px);
-}
-
-/* ===========================
-   Category Badge
-=========================== */
-
-.todo-category {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  /* background: #f8fafc; */
-  /* color: #475569; */
-  font-size: 10px;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.todo-category i {
-  font-size: 11px;
-  color: inherit;
-}
-
-.todo-item:hover .todo-category {
-  transform: translateY(-1px);
-}
-
-/* Animate Drag */
-
 .cdk-drag-preview {
+  border-radius: 0.75rem;
+  background: white;
+  border: 1px solid rgb(226 232 240);
   box-shadow:
     0 10px 15px -3px rgb(0 0 0 / 0.1),
     0 4px 6px -4px rgb(0 0 0 / 0.1);
-  border-radius: 12px;
+}
+
+html.dark .cdk-drag-preview {
+  background: #0f172a;
+  border-color: #334155;
 }
 
 .cdk-drag-placeholder {
   opacity: 0;
 }
 
-.cdk-drag-animating {
-  transition: transform 250ms ease;
-}
-
+.cdk-drag-animating,
 .cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
-  transition: transform 250ms ease;
-}
-
-html.dark .cdk-drag-preview {
-  background: #0f172a;
-  border: 1px solid #334155;
+  transition: transform 200ms;
 }
