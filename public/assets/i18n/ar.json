@@ -1,0 +1,27 @@
+{
+  "header": {
+    "title": "تطبيق المهام",
+    "subtitle": "نظّم مهامك وأنجز أعمالك بسهولة",
+    "theme": "الوضع",
+    "language": "اللغة"
+  },
+
+  "todo": {
+    "searchPlaceholder": "ابحث عن مهمة...",
+    "addTodo": "إضافة مهمة",
+    "pending": "قيد التنفيذ",
+    "completed": "مكتملة",
+    "low": "منخفض",
+    "medium": "متوسط",
+    "high": "مرتفع",
+    "work": "العمل",
+    "personal": "شخصي",
+    "study": "الدراسة",
+    "shopping": "التسوق",
+    "health": "الصحة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء"
+  }
+}

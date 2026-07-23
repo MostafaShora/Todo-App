@@ -1,0 +1,23 @@
+{
+  "header": {
+    "title": "Todo App",
+    "subtitle": "Stay organized and get things done",
+    "search": "Search...",
+    "addTodo": "Add Todo",
+    "theme": "Theme",
+    "language": "Language"
+  },
+
+  "todo": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "work": "Work",
+    "personal": "Personal",
+    "study": "Study",
+    "shopping": "Shopping",
+    "health": "Health"
+  }
+}
