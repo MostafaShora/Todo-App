@@ -5,16 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TodoService } from '../../core/services/todo';
 import { getRelativeDueDate } from '../../core/utils/date.utils';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { LanguageService } from '../../core/i18n/language.service';
 
 @Component({
   selector: 'app-todo-item',
-  imports: [DatePipe, CommonModule, FormsModule, DragDropModule],
+  imports: [DatePipe, CommonModule, FormsModule, DragDropModule, TranslocoPipe],
   templateUrl: './todo-item.html',
   styleUrl: './todo-item.css',
 })
 export class TodoItem {
 
   private todoService = inject(TodoService);
+
+  protected language = inject(LanguageService);
 
   todo = input.required<Todo>();
 

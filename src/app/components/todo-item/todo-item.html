@@ -54,17 +54,17 @@
         @switch (todo().priority) {
           @case ('Low') {
             <i class="fa-solid fa-circle text-[7px]"></i>
-            <span>Low</span>
+            <span>{{ 'todo.low' | transloco }}</span>
           }
 
           @case ('Medium') {
             <i class="fa-solid fa-circle text-[7px]"></i>
-            <span>Medium</span>
+            <span>{{ 'todo.medium' | transloco }}</span>
           }
 
           @case ('High') {
             <i class="fa-solid fa-circle text-[7px]"></i>
-            <span>High</span>
+            <span>{{ 'todo.high' | transloco }}</span>
           }
         }
       </div>
@@ -106,7 +106,7 @@
           }
         }
 
-        <span>{{ todo().category }}</span>
+        <span>{{ 'todo.' + todo().category.toLowerCase() | transloco }}</span>
       </div>
     </div>
 
@@ -127,7 +127,8 @@
         } @else {
           <span class="text-slate-400 dark:text-slate-500 flex items-center gap-1">
             <i class="fa-regular fa-calendar-plus"></i>
-            Created {{ todo().createdAt | date: 'MMM d, y' }}
+            {{ 'todo.created' | transloco }}
+            {{ todo().createdAt | date: 'MMM d, y' }}
           </span>
         }
       </div>
@@ -150,7 +151,7 @@
               todo().status === 'Completed',
           }"
         >
-          {{ todo().status }}
+          {{ ('todo.' + todo().status.toLowerCase()) | transloco }}
         </span>
       </div>
     </div>

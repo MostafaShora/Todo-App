@@ -7,8 +7,11 @@
     "theme": "Theme",
     "language": "Language"
   },
-
   "todo": {
+    "searchPlaceholder": "Search tasks...",
+    "taskPlaceholder": "What needs to be done?",
+    "clearSearch": "Clear search",
+    "addTodo": "Add Todo",
     "pending": "Pending",
     "completed": "Completed",
     "low": "Low",
@@ -18,6 +21,48 @@
     "personal": "Personal",
     "study": "Study",
     "shopping": "Shopping",
-    "health": "Health"
+    "health": "Health",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "created": "Created"
+  },
+  "form": {
+    "priority": "Priority",
+    "category": "Category",
+    "dueDate": "Due Date"
+  },
+  "stats": {
+    "total": "Total Tasks",
+    "pending": "Pending",
+    "completed": "Completed",
+    "overdue": "Overdue"
+  },
+  "sort": {
+    "manual": "Manual",
+    "newest": "Date Added (Newest)",
+    "oldest": "Date Added (Oldest)",
+    "nameAsc": "Name (A-Z)",
+    "nameDesc": "Name (Z-A)",
+    "priorityHigh": "Highest Priority",
+    "priorityLow": "Lowest Priority"
+  },
+  "filter": {
+    "all": "All",
+    "category": "Category",
+    "priority": "Priority"
+  },
+  "empty": {
+    "title": "No tasks found",
+    "description": "Try creating a new task or change your search or filters."
+  },
+  "edit": {
+    "title": "Edit Task",
+    "taskName": "Task Name"
+  },
+  "confirm": {
+    "deleteTitle": "Delete Task",
+    "deleteMessage": "Are you sure you want to delete this task?"
   }
 }

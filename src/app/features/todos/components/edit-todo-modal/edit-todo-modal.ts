@@ -3,17 +3,22 @@ import { FormsModule } from '@angular/forms';
 import { Todo } from '../../../../models/todo.model';
 import { Priority } from '../../../../core/types/priority.type';
 import { Category } from '../../../../core/types/category.type';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { LanguageService } from '../../../../core/i18n/language.service';
 
 @Component({
   selector: 'app-edit-todo-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslocoPipe],
   templateUrl: './edit-todo-modal.html',
   styleUrl: './edit-todo-modal.css',
 })
 export class EditTodoModal {
 
   private elementRef = inject(ElementRef);
+
+  protected language = inject(LanguageService);
+
 
   titleInput = viewChild<ElementRef<HTMLInputElement>>('titleInput');
 

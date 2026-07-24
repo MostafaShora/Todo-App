@@ -8,7 +8,7 @@
     <input
       type="text"
       class="search-input w-full pl-10 pr-10 py-2 border-2 border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all"
-      placeholder="Search tasks..."
+      [placeholder]="'todo.searchPlaceholder' | transloco"
       [value]="searchTerm()"
       (input)="onSearch($event)"
     />
@@ -18,7 +18,7 @@
         type="button"
         (click)="clearSearch()"
         class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-red-500 transition"
-        aria-label="Clear search"
+        [attr.aria-label]="'todo.clearSearch' | transloco"
       >
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -50,7 +50,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-grip-vertical w-4"></i>
-            Manual
+            {{ 'sort.manual' | transloco }}
           </span>
 
           @if (currentSort() === 'Manual') {
@@ -66,7 +66,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-calendar w-4"></i>
-            Date Added (Newest)
+            {{ 'sort.newest' | transloco }}
           </span>
 
           @if (currentSort() === 'Newest') {
@@ -82,7 +82,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-calendar-days w-4"></i>
-            Date Added (Oldest)
+            {{ 'sort.oldest' | transloco }}
           </span>
 
           @if (currentSort() === 'Oldest') {
@@ -100,7 +100,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-font w-4"></i>
-            Name (A-Z)
+            {{ 'sort.nameAsc' | transloco }}
           </span>
 
           @if (currentSort() === 'NameAsc') {
@@ -116,7 +116,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-font w-4"></i>
-            Name (Z-A)
+            {{ 'sort.nameDesc' | transloco }}
           </span>
 
           @if (currentSort() === 'NameDesc') {
@@ -132,7 +132,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-arrow-up-wide-short w-4"></i>
-            Highest Priority
+            {{ 'sort.priorityHigh' | transloco }}
           </span>
 
           @if (currentSort() === 'PriorityHigh') {
@@ -148,7 +148,7 @@
         >
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-arrow-down-wide-short w-4"></i>
-            Lowest Priority
+            {{ 'sort.priorityLow' | transloco }}
           </span>
 
           @if (currentSort() === 'PriorityLow') {
@@ -181,7 +181,7 @@
         <button class="dropdown-item" (click)="setFilter('All')">
           <span>
             <i class="fa-solid fa-layer-group"></i>
-            All
+            {{ 'filter.all' | transloco }}
           </span>
 
           @if (currentFilter() === 'All') {
@@ -194,7 +194,7 @@
         <button class="dropdown-item" (click)="setFilter('Pending')">
           <span>
             <i class="fa-solid fa-clock"></i>
-            Pending
+            {{ 'todo.pending' | transloco }}
           </span>
 
           @if (currentFilter() === 'Pending') {
@@ -207,7 +207,7 @@
         <button class="dropdown-item" (click)="setFilter('Completed')">
           <span>
             <i class="fa-solid fa-check"></i>
-            Completed
+            {{ 'todo.completed' | transloco }}
           </span>
 
           @if (currentFilter() === 'Completed') {
@@ -219,13 +219,13 @@
 
         <!-- Category -->
         <div class="px-4 py-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
-          Category
+          {{ 'filter.category' | transloco }}
         </div>
 
         <button class="dropdown-item" (click)="setFilter('Work')">
           <span>
             <i class="fa-solid fa-briefcase text-sky-500"></i>
-            Work
+            {{ 'todo.work' | transloco }}
           </span>
 
           @if (currentFilter() === 'Work') {
@@ -236,7 +236,7 @@
         <button class="dropdown-item" (click)="setFilter('Personal')">
           <span>
             <i class="fa-solid fa-user text-pink-500"></i>
-            Personal
+            {{ 'todo.personal' | transloco }}
           </span>
 
           @if (currentFilter() === 'Personal') {
@@ -247,7 +247,7 @@
         <button class="dropdown-item" (click)="setFilter('Study')">
           <span>
             <i class="fa-solid fa-book text-indigo-500"></i>
-            Study
+            {{ 'todo.study' | transloco }}
           </span>
 
           @if (currentFilter() === 'Study') {
@@ -258,7 +258,7 @@
         <button class="dropdown-item" (click)="setFilter('Shopping')">
           <span>
             <i class="fa-solid fa-cart-shopping text-orange-500"></i>
-            Shopping
+            {{ 'todo.shopping' | transloco }}
           </span>
 
           @if (currentFilter() === 'Shopping') {
@@ -269,7 +269,7 @@
         <button class="dropdown-item" (click)="setFilter('Health')">
           <span>
             <i class="fa-solid fa-heart-pulse text-red-500"></i>
-            Health
+            {{ 'todo.health' | transloco }}
           </span>
 
           @if (currentFilter() === 'Health') {
@@ -282,13 +282,13 @@
         <div class="border-t border-slate-100 dark:border-slate-700"></div>
 
         <div class="px-4 py-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase">
-          Priority
+          {{ 'filter.priority' | transloco }}
         </div>
 
         <button class="dropdown-item" (click)="setFilter('High')">
           <span>
             <i class="fa-solid fa-circle text-red-500 text-[10px]"></i>
-            High
+            {{ 'todo.high' | transloco }}
           </span>
 
           @if (currentFilter() === 'High') {
@@ -301,7 +301,7 @@
         <button class="dropdown-item" (click)="setFilter('Medium')">
           <span>
             <i class="fa-solid fa-circle text-yellow-400 text-[10px]"></i>
-            Medium
+            {{ 'todo.medium' | transloco }}
           </span>
 
           @if (currentFilter() === 'Medium') {
@@ -314,7 +314,7 @@
         <button class="dropdown-item" (click)="setFilter('Low')">
           <span>
             <i class="fa-solid fa-circle text-green-500 text-[10px]"></i>
-            Low
+            {{ 'todo.low' | transloco }}
           </span>
 
           @if (currentFilter() === 'Low') {

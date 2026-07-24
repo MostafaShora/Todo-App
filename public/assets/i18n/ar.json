@@ -2,12 +2,15 @@
   "header": {
     "title": "تطبيق المهام",
     "subtitle": "نظّم مهامك وأنجز أعمالك بسهولة",
+    "search": "بحث...",
+    "addTodo": "إضافة مهمة",
     "theme": "الوضع",
     "language": "اللغة"
   },
-
   "todo": {
     "searchPlaceholder": "ابحث عن مهمة...",
+    "taskPlaceholder": "ماذا تريد أن تنجز؟",
+    "clearSearch": "مسح البحث",
     "addTodo": "إضافة مهمة",
     "pending": "قيد التنفيذ",
     "completed": "مكتملة",
@@ -22,6 +25,44 @@
     "edit": "تعديل",
     "delete": "حذف",
     "save": "حفظ",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "created": "تم الإنشاء"
+  },
+  "form": {
+    "priority": "الأولوية",
+    "category": "الفئة",
+    "dueDate": "تاريخ الاستحقاق"
+  },
+  "stats": {
+    "total": "إجمالي المهام",
+    "pending": "قيد التنفيذ",
+    "completed": "مكتملة",
+    "overdue": "متأخرة"
+  },
+  "sort": {
+    "manual": "يدوي",
+    "newest": "تاريخ الإضافة (الأحدث)",
+    "oldest": "تاريخ الإضافة (الأقدم)",
+    "nameAsc": "الاسم (أ-ي)",
+    "nameDesc": "الاسم (ي-أ)",
+    "priorityHigh": "الأولوية الأعلى",
+    "priorityLow": "الأولوية الأقل"
+  },
+  "filter": {
+    "all": "الكل",
+    "category": "الفئة",
+    "priority": "الأولوية"
+  },
+  "empty": {
+    "title": "لا توجد مهام",
+    "description": "جرّب إضافة مهمة جديدة أو غيّر البحث أو الفلاتر."
+  },
+  "edit": {
+    "title": "تعديل المهمة",
+    "taskName": "اسم المهمة"
+  },
+  "confirm": {
+    "deleteTitle": "حذف المهمة",
+    "deleteMessage": "هل أنت متأكد من حذف هذه المهمة؟"
   }
 }

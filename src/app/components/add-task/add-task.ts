@@ -4,18 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/services/toast';
 import { Priority } from '../../core/types/priority.type';
 import { Category } from '../../core/types/category.type';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { LanguageService } from '../../core/i18n/language.service';
 
 @Component({
   selector: 'app-add-task',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslocoPipe],
   templateUrl: './add-task.html',
   styleUrl: './add-task.css',
 })
 export class AddTask {
   private todoService = inject(TodoService);
   private toastService = inject(ToastService);
-
-  private elementRef = inject(ElementRef)
+  
+  private elementRef = inject(ElementRef);
+  
+  protected language = inject(LanguageService);
 
   priority = signal<Priority>('Medium');
   category = signal<Category>('Personal');

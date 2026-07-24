@@ -2,16 +2,21 @@ import { Component, computed, ElementRef, HostListener, inject, signal } from '@
 import { TodoService } from '../../core/services/todo';
 import { TodoFilter } from '../../core/types/todo-filter.type';
 import { SortOption } from '../../core/types/sort-option.type';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { LanguageService } from '../../core/i18n/language.service';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [],
+  imports: [TranslocoPipe],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.css',
 })
 export class Toolbar {
   private todoService = inject(TodoService);
-  private elementRef = inject(ElementRef)
+  private elementRef = inject(ElementRef);
+
+  protected language = inject(LanguageService);
+
 
   currentFilter = this.todoService.filter;
   currentSort = this.todoService.sort;
